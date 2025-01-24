@@ -1,0 +1,33 @@
+:host {
+  --mau-menu-max-width: 150px;
+
+  div {
+    background: var(--mau-color-dark);
+    border-radius: 8px;
+    width: var(--mau-menu-max-width);
+
+    div {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      color: var(--mau-color-light);
+
+      mau-icon {
+        margin-top: 3px;
+      }
+
+      &:hover {
+        border-radius: 0px;
+        background: var(--mau-color-light);
+        color: var(--mau-color-dark);
+        opacity: 0.4;
+
+        mau-icon {
+          --color-icon: var(--mau-color-dark);
+        }
+      }
+    }
+  }
+}

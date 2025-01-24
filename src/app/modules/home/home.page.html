@@ -1,0 +1,17 @@
+<ion-content>
+  @if (isMenuOpen()) {
+    <mau-backdrop [isBackdropVisible]='true' (backdropClicked)='backdropClicked($event)'/>
+  }
+  <mau-overview>
+    <mau-header
+      [menuOptions]='menuOptions'
+      [isMenuOpen]='isMenuOpen()'
+      (optionSelected)='optionMenuSelected($event)'
+      (menuOpened)='menuOpened($event)' header>
+      Mau Tasks App
+    </mau-header>
+    <div content>
+      <p>Content</p>
+    </div>
+  </mau-overview>
+</ion-content>

@@ -1,0 +1,13 @@
+<div>
+  <h2>
+    <ng-content />
+  </h2>
+
+  <mau-button (onClick)='buttonToggleMenu()'>
+    <mau-icon name='ellipsis-horizontal-outline' />
+  </mau-button>
+
+  @if (menuOptions().length > 0 && isShownMenu()) {
+    <mau-menu-options [menuOptions]='menuOptions()' (setOptionSelected)='optionMenuSelected($event)' />
+  }
+</div>

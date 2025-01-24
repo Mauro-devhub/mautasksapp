@@ -1,0 +1,10 @@
+<div>
+  @for (option of menuOptions(); track $index) {
+    <div (click)='optionSelected(option.action)'>
+      <span>
+        {{ option.optionName }}
+      </span>
+      <mau-icon [name]='option.iconName' [class.trash-option]='option.action == "DELETE"' />
+    </div>
+  }
+</div>
