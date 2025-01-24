@@ -2,6 +2,8 @@ import { Component, signal } from '@angular/core';
 
 import { IMauMenuOption } from '../shared/components/mau-menu-options/interfaces/mau-menu-options.interface';
 import { EMenuOptions } from '../shared/components/mau-menu-options/enums/mau.menu-options.enums';
+import { ITasks } from '../shared/components/mau-task-list/interfaces/mau-tasks-list.interfaces';
+import { MENU_OPTIONS } from '../shared/contants/menu-options.constants';
 
 @Component({
   selector: 'page-home',
@@ -11,24 +13,27 @@ import { EMenuOptions } from '../shared/components/mau-menu-options/enums/mau.me
 })
 export class HomePage {
   isMenuOpen = signal<boolean>(false);
+  message = 'list tasks empty, add few tasks on menu option ( create task )';
   
-  menuOptions: IMauMenuOption[] = [
+  menuOptions: IMauMenuOption[] = MENU_OPTIONS;
+
+  tasks: ITasks[] = [
     {
-      optionName: 'Create task',
-      iconName: 'add',
-      action: EMenuOptions.CREATE
+      title: 'Mauricio',
+      dateExpire: new Date('12/12/12'),
+      processTask: 'done'
     },
     {
-      optionName: 'Edit task',
-      iconName: 'create-outline',
-      action: EMenuOptions.UPDATE
+      title: 'Mauricio',
+      dateExpire: new Date('12/12/12'),
+      processTask: 'done'
     },
     {
-      optionName: 'Remove task',
-      iconName: 'trash-outline',
-      action: EMenuOptions.DELETE
+      title: 'Mauricio',
+      dateExpire: new Date('12/12/12'),
+      processTask: 'done'
     }
-  ];
+  ]
 
   constructor() { }
 

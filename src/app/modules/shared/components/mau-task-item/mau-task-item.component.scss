@@ -1,0 +1,30 @@
+:host {
+  div {
+    &:nth-child(1) {
+      height: 60px;
+      border-radius: 8px;
+      background: var(--mau-color-medium);
+      padding: 10px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0px 5px 10px var(--mau-color-dark);
+    }
+    
+    div {
+      padding-left: 10px;
+      padding-right: 10px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 200px;
+    }
+
+    span {
+      color: var(--mau-color-light);
+      font-weight: 400;
+    }
+  }
+}
