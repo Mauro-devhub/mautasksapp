@@ -10,8 +10,9 @@
       (menuOpened)='menuOpened($event)' header>
       Mau Tasks App
     </mau-header>
-    <div content>
-      <p>Content</p>
-    </div>
+
+    <mau-show-content-or-message [hasContent]='tasks.length > 0' [message]='message' content>
+      <mau-task-list [tasks]='tasks' />
+    </mau-show-content-or-message>
   </mau-overview>
 </ion-content>

@@ -1,0 +1,11 @@
+<div>
+  <!-- Has content -->
+  @if (hasContent()) {
+    <ng-content />
+  } @else {
+    <!-- Not has content -->
+    <ng-container>
+      <mau-info-message [message]='message()'/>
+    </ng-container>
+  }
+</div>

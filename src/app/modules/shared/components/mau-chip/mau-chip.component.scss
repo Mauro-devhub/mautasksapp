@@ -1,0 +1,40 @@
+:host {
+  div {
+    ion-chip {
+      width: 60px;
+      margin: 0px;
+      padding: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      span {
+        font-size: 10px;
+        font-weight: 700;
+      }
+    }
+  }
+
+  .success {
+    --background: var(--mau-color);
+    --color: var(--mau-color-dark);
+    
+    span {
+      text-decoration: line-through;
+    }
+  }
+
+  .pending {
+    --background: #00213f;
+    --color: #adefd1;
+  }
+
+  .danger {
+    --background: #00213f;
+    --color: #adefd1;
+
+    span {
+      text-decoration: line-through;
+    }
+  }
+}
