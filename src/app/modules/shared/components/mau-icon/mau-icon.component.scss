@@ -1,0 +1,11 @@
+:host {
+  --color-icon: white;
+  --height-icon: 20px;
+  --width-icon: 20px;
+
+  ion-icon {
+    color: var(--color-icon);
+    height: var(--height-icon);
+    width: var(--width-icon);
+  }
+}
