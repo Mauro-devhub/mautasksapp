@@ -1,6 +1,6 @@
 import { Component, input, OnInit } from '@angular/core';
 import { addIcons } from 'ionicons';
-import { add, createOutline, ellipsisHorizontalOutline, trashOutline } from 'ionicons/icons';
+import { add, createOutline, ellipsisHorizontalOutline, trashOutline, fileTrayStackedOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'mau-icon',
@@ -17,7 +17,8 @@ export class MauIconComponent implements OnInit {
       ellipsisHorizontalOutline,
       add,
       trashOutline,
-      createOutline
+      createOutline,
+      fileTrayStackedOutline
     })
   }
   

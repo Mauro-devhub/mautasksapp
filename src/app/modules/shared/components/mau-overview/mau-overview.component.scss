@@ -11,8 +11,10 @@
     div {
       background: var(--mau-color-light);
       border-radius: 10px;
-      display: flex;
-      flex-direction: column;
+      
+      &:nth-child(2) {
+        overflow-y: scroll;
+      }
 
       @media (min-width: 0px) and (max-width: 576px) {
         height: 600px;
@@ -29,12 +31,16 @@
         width: 650px;
       }
 
-      ng-content {
-        &:first-child {
-          height: 40px;
-          width: inherit;
-        }
+      div {
+        padding: 30px;
       }
+
+      // ng-content {
+      //   &:first-child {
+      //     height: 40px;
+      //     width: inherit;
+      //   }
+      // }
     }
   }
 }

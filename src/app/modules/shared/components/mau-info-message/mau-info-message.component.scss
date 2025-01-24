@@ -1,0 +1,39 @@
+:host {
+  --height: inherit;
+  --width: inherit;
+
+  div {
+    height: var(--height);
+    width: var(--width);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    div {
+      height: 350px;
+      width: 350px;
+      padding: 20px;
+      background: var(--mau-color-medium);
+      opacity: 0.7;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+  
+      span {
+        text-align: center;
+        color: var(--mau-color-light);
+        font-weight: 600;
+        font-size: 14px;
+      }
+    }
+  }
+
+  mau-icon {
+    --height-icon: 120px;
+    --width-icon: 120px;
+  }
+}

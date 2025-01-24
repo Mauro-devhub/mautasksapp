@@ -1,0 +1,5 @@
+export enum EMauChip {
+  SUCCESS='SUCCESS',
+  PENDING='PENDING',
+  DANGER='DANGER'
+}

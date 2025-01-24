@@ -1,0 +1,11 @@
+:host {
+  div {
+    height: 100%;
+    width: inherit;
+
+    mau-info-message {
+      --height: 100%;
+      --width: inherit;
+    }
+  }
+}
