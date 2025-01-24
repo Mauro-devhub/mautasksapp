@@ -1,0 +1,40 @@
+:host {
+  main {
+    height: 100%;
+    width: 100%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    div {
+      background: var(--mau-color-light);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+
+      @media (min-width: 0px) and (max-width: 576px) {
+        height: 600px;
+        width: 300px;
+      }
+  
+      @media (min-width: 576px) and (max-width: 768px) {
+        height: 600px;
+        width: 500px;
+      }
+      
+      @media (min-width: 768px) {
+        height: 650px;
+        width: 650px;
+      }
+
+      ng-content {
+        &:first-child {
+          height: 40px;
+          width: inherit;
+        }
+      }
+    }
+  }
+}

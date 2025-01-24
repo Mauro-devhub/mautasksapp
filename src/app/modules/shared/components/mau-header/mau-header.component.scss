@@ -1,0 +1,30 @@
+:host {
+  div {
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background: var(--mau-color-medium);
+
+    h2 {
+      color: var(--mau-color-light);
+      margin: 0px;
+    }
+
+    mau-button {
+      position: absolute;
+      right: 10px;
+      z-index: 5;
+    }
+    
+    mau-menu-options {
+      position: absolute;
+      top: 55px;
+      right: 10px;
+      z-index: 5;
+    }
+  }
+}
