@@ -12,8 +12,11 @@ import { EMenuOptions } from '../mau-menu-options/enums/mau.menu-options.enums';
 export class MauHeaderComponent implements OnInit {
   menuOptions = input<IMauMenuOption[]>([]);
   isMenuOpen = input<boolean>();
+  isShownIconTrash = input<boolean>(false);
+  isBackButtonShown = input<boolean>(false);
 
   @Output() optionSelected = new EventEmitter<EMenuOptions>();
+  @Output() removeElements = new EventEmitter();
 
   isShownMenu = signal<boolean>(false);
 
@@ -38,4 +41,7 @@ export class MauHeaderComponent implements OnInit {
     this.optionSelected.emit(e);
   }
 
+  removeOption() {
+    this.removeElements.emit();
+  }
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
@@ -9,7 +10,8 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     IonicModule,
     HomePageRoutingModule,
-    SharedModule
+    SharedModule,
+    RouterModule
   ],
   declarations: [HomePage]
 })
