@@ -1,7 +1,16 @@
 <div>
-  <span>titlesacsdafsad</span>
+  <span>
+    @if (optionSelected() == 'DELETE') {
+      <mau-checkbox [value]='idTask()' (checkboxSelected)='itemTaskSelected($event)' />
+    }
+
+    @if (optionSelected() == 'EDIT') {
+      <mau-icon name='create-outline' (click)='itemTaskToEdit()' />
+    }
+  </span>
+  <span>{{ title() }}</span>
   <div>
-    <span>date-end</span>
-    <mau-chip currentProcess='done' />
+    <span>{{ date }}</span>
+    <mau-chip [currentProcess]='processTask()' />
   </div>
 </div>

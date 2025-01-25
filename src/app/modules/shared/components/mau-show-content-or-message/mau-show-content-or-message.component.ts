@@ -8,7 +8,7 @@ import { Component, input, OnInit } from '@angular/core';
 })
 export class MauShowContentOrMessageComponent implements OnInit {
   hasContent = input.required<boolean>();
-  message = input.required<string>();
+  message = input<string>('');
 
   constructor() { }
 
