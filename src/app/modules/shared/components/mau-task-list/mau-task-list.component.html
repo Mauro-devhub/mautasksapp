@@ -1,5 +1,12 @@
 <div>
   @for (task of tasks(); track $index) {
-    <mau-task-item [title]='task.title' [dateExpire]='task.dateExpire' [processTask]='task.processTask' />
+    <mau-task-item 
+      [idTask]='task.id' 
+      [title]='task.title' 
+      [dateExpire]='task.dateExpire' 
+      [processTask]='task.processTask'
+      [optionSelected]='optionSelected()'
+      (taskSelected)='itemTaskSelected($event)' 
+    />
   }
 </div>

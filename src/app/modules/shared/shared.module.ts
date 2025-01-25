@@ -13,6 +13,7 @@ import { MauChipComponent } from './components/mau-chip/mau-chip.component';
 import { MauTaskListComponent } from './components/mau-task-list/mau-task-list.component';
 import { MauShowContentOrMessageComponent } from './components/mau-show-content-or-message/mau-show-content-or-message.component';
 import { MauInfoMessageComponent } from './components/mau-info-message/mau-info-message.component';
+import { MauCheckboxComponent } from './components/mau-checkbox/mau-checkbox.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MauInfoMessageComponent } from './components/mau-info-message/mau-info-
     MauChipComponent,
     MauTaskListComponent,
     MauShowContentOrMessageComponent,
-    MauInfoMessageComponent
+    MauInfoMessageComponent,
+    MauCheckboxComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +45,8 @@ import { MauInfoMessageComponent } from './components/mau-info-message/mau-info-
     MauChipComponent,
     MauTaskListComponent,
     MauShowContentOrMessageComponent,
-    MauInfoMessageComponent
+    MauInfoMessageComponent,
+    MauCheckboxComponent
   ]
 })
 export class SharedModule {}
