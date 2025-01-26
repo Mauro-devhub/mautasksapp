@@ -1,4 +1,7 @@
-<ion-button (click)='setClick()'>
+<ion-button
+  [disabled]='disabled()'
+  (click)='setClick()' 
+  [type]='type()'>
   <span>
     <ng-content />
   </span>

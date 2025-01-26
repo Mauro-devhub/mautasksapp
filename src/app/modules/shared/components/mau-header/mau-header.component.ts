@@ -17,10 +17,10 @@ export class MauHeaderComponent implements OnInit {
 
   @Output() optionSelected = new EventEmitter<EMenuOptions>();
   @Output() removeElements = new EventEmitter();
+  @Output() backButton = new EventEmitter();
+  @Output() menuOpened = new EventEmitter<boolean>();
 
   isShownMenu = signal<boolean>(false);
-
-  @Output() menuOpened = new EventEmitter<boolean>();
 
   constructor() {
     effect(() => {
@@ -43,5 +43,9 @@ export class MauHeaderComponent implements OnInit {
 
   removeOption() {
     this.removeElements.emit();
+  }
+
+  backButtonAction() {
+    this.backButton.emit();
   }
 }

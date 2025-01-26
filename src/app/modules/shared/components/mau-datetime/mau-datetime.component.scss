@@ -1,0 +1,28 @@
+:host {
+  div {
+    max-width: 270px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    
+    span {
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 30px;
+      color: var(--mau-color-dark);
+    }
+
+    mau-input {
+      --cursor-input: pointer;
+      --padding-top-input: 0px;
+      --padding-bottom-input: 0px;
+      --padding-start-input: 0px;
+      --padding-end-input: 0px;
+    }
+  }
+
+  ion-datetime {
+    height: 300px;
+    width: 300px;
+  }
+}

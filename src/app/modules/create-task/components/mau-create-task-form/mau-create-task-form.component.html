@@ -1,0 +1,36 @@
+<form [formGroup]='formGroupCreateTask' (submit)='save()'>
+  <mau-input 
+    formControlName='title' 
+    [errorMessageInput]='errorMessageInputTitle()' 
+    label='title' 
+    placeholder='Type title your task' 
+  />
+
+  <mau-textarea 
+    formControlName='description' 
+    [errorMessageTextarea]='errorMessageTextarea()'
+    label='description' 
+    placeholder='Type description task' 
+  />
+
+  <mau-datetime
+    formControlName='dateExpire'
+    [errorMessageDatetime]='errorMessageDatetime()'
+    label='expiration date' 
+  />
+
+  <mau-button 
+    [disabled]='
+      !formGroupCreateTask.valid ||
+      !formGroupCreateTask.controls["title"].valid ||
+      !formGroupCreateTask.controls["description"].valid ||
+      !formGroupCreateTask.controls["dateExpire"].valid ||
+      (
+        errorMessageDatetime().length > 0 && 
+        formGroupCreateTask.controls["dateExpire"].dirty
+      )
+    '
+    type='submit'>
+    <mau-icon name='add' />
+  </mau-button>
+</form>

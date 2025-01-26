@@ -9,6 +9,7 @@
       [isShownIconTrash]='tasksToRemove().length > 0'
       [isBackButtonShown]='isBackButtonShown()'
       (removeElements)='removeItemTasks()'
+      (backButton)='removeItemTasks()'
       (optionSelected)='optionMenuSelected($event)'
       (menuOpened)='menuOpened($event)' header>
       Mau Tasks App
