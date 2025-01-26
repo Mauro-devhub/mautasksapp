@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { CreateTaskDTO } from './dtos/create-task.dto';
 
 @Component({
   selector: 'page-create-task',
@@ -7,10 +10,22 @@ import { Component, OnInit } from '@angular/core';
   standalone: false
 })
 export class CreateTaskPage implements OnInit {
+  route = inject(Router);
+
+  isBackButtonShown = signal<boolean>(true);
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  previousPath() {
+    this.route.navigate(['/']);
+  }
+
+  createTask(createTaskDto: CreateTaskDTO) {
+    console.log(createTaskDto);
+    this.route.navigateByUrl('/');
   }
 
 }
