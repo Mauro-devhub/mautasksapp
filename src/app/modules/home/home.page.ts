@@ -2,12 +2,15 @@ import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { IMauMenuOption } from '../shared/components/mau-menu-options/interfaces/mau-menu-options.interface';
-import { EMenuOptionsDefault } from '../shared/components/mau-menu-options/enums/mau.menu-options.enums';
+import { ECustomOptions, EMenuOptionsDefault, EMenuOptionsState } from '../shared/components/mau-menu-options/enums/mau.menu-options.enums';
 import { ITasks } from '../shared/components/mau-task-list/interfaces/mau-tasks-list.interfaces';
-import { MENU_OPTIONS, MENU_OPTIONS_TASK } from '../shared/contants/menu-options.constants';
+import { MENU_OPTIONS, MENU_OPTIONS_SEARCH_BAR, MENU_OPTIONS_TASK } from '../shared/contants/menu-options.constants';
 import { NAVIGATE_URL } from '../shared/enums/navigate-url.enum';
-import { TProcessChip } from '../shared/components/mau-chip/types/mau-chip.types';
+import { EProcessChip } from '../shared/components/mau-chip/enums/mau-chip.enums';
 import { TMenu } from '../shared/components/mau-menu-options/types/mau-menu.types';
+import { ERROR_MESSAGES } from '../shared/contants/error-messages.contant';
+import { filterByElement } from '../shared/utils/filters.utils';
+import { formatUtils } from '../shared/utils/date.utils';
 
 @Component({
   selector: 'page-home',
@@ -26,31 +29,35 @@ export class HomePage {
   tasksToRemove = signal<number[]>([]);
   tasksToComplete = signal<number[]>([]);
 
-  message: string = 'list tasks empty, add few tasks on menu option ( create task )';
+  message = ERROR_MESSAGES.NOT_HAS_CONTENT;
+  placeholderSearchBar: string = 'search a task by title'
   
   menuOptions: IMauMenuOption[] = MENU_OPTIONS;
   menuOptionsTask: IMauMenuOption[] = MENU_OPTIONS_TASK;
+  menuOptionsSearchBar: IMauMenuOption[] = MENU_OPTIONS_SEARCH_BAR;
 
   tasks: ITasks[] = [
     {
       id: 1,
       title: 'Mauricio',
-      dateExpire: new Date('12/12/15'),
-      processTask: 'done'
+      dateExpire: formatUtils(new Date('01/20/25')),
+      processTask: EProcessChip.DONE
     },
     {
       id: 2,
-      title: 'Mauricio',
-      dateExpire: new Date('12/12/12'),
-      processTask: 'expired'
+      title: 'Jose',
+      dateExpire: formatUtils(new Date('01/23/25')),      
+      processTask: EProcessChip.EXPIRED
     },
     {
       id: 3,
-      title: 'Mauricio',
-      dateExpire: new Date('12/12/25'),
-      processTask: 'pending'
+      title: 'Carla',
+      dateExpire: formatUtils(new Date('01/28/25')),
+      processTask: EProcessChip.PENDING
     }
   ]
+
+  tasksFilter: ITasks[] = [...this.tasks];
 
   constructor() { }
 
@@ -66,6 +73,13 @@ export class HomePage {
     if (this.tasksToRemove().length > 0) {
       this.tasksToRemove.set([]);
     }
+  }
+
+  menuSearchBarOpened(e: boolean) {
+    this.isShownIconTrash.set(false);
+    this.optionSelected.set(null);
+    this.isBackButtonShown.set(false);
+    this.isMenuOpen.set(false);
   }
 
   optionMenuSelected(e: EMenuOptionsDefault): void {
@@ -116,17 +130,60 @@ export class HomePage {
       this.tasks = this.tasks.filter((e) => e.id !== task.id);
     }
 
+    this.tasksFilter = this.tasks.map((e) => {
+      if (e.id === task.id) {
+        return {...e, processTask: task.option as unknown as EProcessChip}
+      }
+
+      return e;
+    })
+
     this.tasks = this.tasks.map((e) => {
       if (e.id === task.id) {
-        return {...e, processTask: task.option.toLowerCase() as TProcessChip}
+        return {...e, processTask: task.option as unknown as EProcessChip}
       }
 
       return e;
     })
   }
 
+  searchBarValue(e: string): void {
+    this.tasksFilter = filterByElement<ITasks>('title', this.tasks, e);
+    this.message = ERROR_MESSAGES.ELEMENT_FILTER_NOT_FOUND;
+  }
+
+  filterListByAction(e: IMauMenuOption): void {
+    if (e.optionName == ECustomOptions.SHOW_ALL) {
+      this.tasksFilter = this.tasks;
+    }
+
+    if (e.optionName == ECustomOptions.EXP_DATE) {
+      this.tasksFilter = this.tasks.sort((a, b) => {
+        const dateA = new Date(a.dateExpire);
+        const dateB = new Date(b.dateExpire);
+        
+        return dateB.getTime() - dateA.getTime();
+      });
+    }
+    
+    if (e.optionName === EMenuOptionsState.DONE) {
+      this.tasksFilter = filterByElement<ITasks>('processTask', this.tasks, e.optionName);
+    }
+
+    if (e.optionName === EMenuOptionsState.EXPIRED) {
+      this.tasksFilter = filterByElement<ITasks>('processTask', this.tasks, e.optionName);
+    }
+
+    if (e.optionName === EMenuOptionsState.PENDING) {
+      this.tasksFilter = filterByElement<ITasks>('processTask', this.tasks, e.optionName);
+    }
+
+    this.message = ERROR_MESSAGES.ELEMENT_FILTER_NOT_FOUND;
+  }
+
   removeItemTasks(): void {
     this.tasks = [...this.tasks.filter((e) => !this.tasksToRemove().includes(e.id))];
+    this.tasksFilter = [...this.tasks.filter((e) => !this.tasksToRemove().includes(e.id))];
     this.tasksToRemove.set([]);
     this.isShownIconTrash.set(false);
     this.optionSelected.set(null);

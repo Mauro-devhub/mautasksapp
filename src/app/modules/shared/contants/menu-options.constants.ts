@@ -1,4 +1,4 @@
-import { EMenuOptionsDefault, EMenuOptionsState } from '../components/mau-menu-options/enums/mau.menu-options.enums';
+import { ECustomOptions, EMenuOptionsDefault, EMenuOptionsState } from '../components/mau-menu-options/enums/mau.menu-options.enums';
 import { IMauMenuOption } from '../components/mau-menu-options/interfaces/mau-menu-options.interface';
 import { NAVIGATE_URL } from '../enums/navigate-url.enum';
 
@@ -37,5 +37,31 @@ export const MENU_OPTIONS_TASK: IMauMenuOption[] = [
     optionName: 'REMOVE',
     iconName: 'create-outline',
     action: EMenuOptionsDefault.DELETE,
+  }
+];
+
+export const MENU_OPTIONS_SEARCH_BAR: IMauMenuOption[] = [
+  {
+    optionName: ECustomOptions.EXP_DATE,
+    action: EMenuOptionsDefault.FILTER
+  },
+  {
+    optionName: EMenuOptionsState.DONE,
+    hasChip: true,
+    action: EMenuOptionsDefault.FILTER
+  },
+  {
+    optionName: EMenuOptionsState.PENDING,
+    hasChip: true,
+    action: EMenuOptionsDefault.FILTER
+  },
+  {
+    optionName: EMenuOptionsState.EXPIRED,
+    hasChip: true,
+    action: EMenuOptionsDefault.FILTER
+  },
+  {
+    optionName: ECustomOptions.SHOW_ALL,
+    action: EMenuOptionsDefault.FILTER
   }
 ];

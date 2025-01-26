@@ -3,3 +3,9 @@ export enum EMauChip {
   PENDING='PENDING',
   DANGER='DANGER'
 }
+
+export enum EProcessChip {
+  PENDING='PENDING',
+  DONE='DONE',
+  EXPIRED='EXPIRED'
+}

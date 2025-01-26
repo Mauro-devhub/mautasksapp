@@ -14,15 +14,26 @@
       (menuOpened)='menuOpened($event)' header>
       Mau Tasks App
     </mau-header>
-
-    <mau-show-content-or-message [hasContent]='tasks.length > 0' [message]='message' content>
-      <mau-task-list 
-        [tasks]='tasks' 
-        [optionSelected]='optionSelected()' 
-        (taskSelected)='taskSelected($event)' 
-        [menuOptions]='menuOptionsTask'
-        (taskChangeState)='taskChangeState($event)'
+    
+    <div content>
+      <mau-search-bar 
+        [menuOptions]='menuOptionsSearchBar'
+        [placeholder]='placeholderSearchBar' 
+        (searchBarValue)='searchBarValue($event)' 
+        (optionMenuSearchBarSelected)='filterListByAction($event)'
+        (menuSearchBarOpened)='menuSearchBarOpened($event)'
+        [isShownBtnFilter]='true'
       />
-    </mau-show-content-or-message>
+
+      <mau-show-content-or-message [hasContent]='tasksFilter.length > 0' [message]='message'>
+        <mau-task-list 
+          [tasks]='tasksFilter' 
+          [optionSelected]='optionSelected()' 
+          (taskSelected)='taskSelected($event)' 
+          [menuOptions]='menuOptionsTask'
+          (taskChangeState)='taskChangeState($event)'
+        />
+      </mau-show-content-or-message>
+    </div>
   </mau-overview>
 </ion-content>

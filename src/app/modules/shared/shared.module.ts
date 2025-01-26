@@ -18,6 +18,7 @@ import { MauCheckboxComponent } from './components/mau-checkbox/mau-checkbox.com
 import { MauInputComponent } from './components/mau-input/mau-input.component';
 import { MauTextareaComponent } from './components/mau-textarea/mau-textarea.component';
 import { MauDatetimeComponent } from './components/mau-datetime/mau-datetime.component';
+import { MauSearchBarComponent } from './components/mau-search-bar/mau-search-bar.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MauDatetimeComponent } from './components/mau-datetime/mau-datetime.com
     MauCheckboxComponent,
     MauInputComponent,
     MauTextareaComponent,
-    MauDatetimeComponent
+    MauDatetimeComponent,
+    MauSearchBarComponent
   ],
   imports: [
     CommonModule,
@@ -57,7 +59,8 @@ import { MauDatetimeComponent } from './components/mau-datetime/mau-datetime.com
     MauCheckboxComponent,
     MauInputComponent,
     MauTextareaComponent,
-    MauDatetimeComponent
+    MauDatetimeComponent,
+    MauSearchBarComponent
   ]
 })
 export class SharedModule {}

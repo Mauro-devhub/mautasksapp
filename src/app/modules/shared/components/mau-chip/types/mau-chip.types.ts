@@ -1,1 +1,0 @@
-export type TProcessChip = 'pending' | 'done' | 'expired';

@@ -2,6 +2,7 @@
   div {
     cursor: pointer;
     height: 60px;
+    width: inherit;
     border-radius: 8px;
     background: var(--mau-color-medium);
     padding: 10px;
@@ -17,16 +18,40 @@
       font-weight: 400;
     }
 
-    div {
-      margin-top: 5px;
+    & > div:nth-child(1) {
       width: 50px;
       box-shadow: none;
+      padding: 0px;
       
       mau-menu-options {
         position: absolute;
         left: 10px;
         top: 40px;
         z-index: 5;
+      }
+    }
+
+    & > div:nth-child(2) {
+      box-shadow: none;
+      justify-content: space-between;
+      @media (min-width: 0px) and (max-width: 576px) {
+        width: 150px;
+
+        display: flex;
+        flex-direction: column;
+
+        span {
+          font-size: 12px;
+          font-weight: 500;
+        }
+      }
+
+      @media (min-width: 576px) and (max-width: 768px) {
+        width: 245px;
+      }
+
+      @media (min-width: 768px) {
+        width: 280px;
       }
     }
   }
