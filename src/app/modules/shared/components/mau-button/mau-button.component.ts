@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'mau-button',
@@ -7,6 +7,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   standalone: false
 })
 export class MauButtonComponent implements OnInit {
+  type = input<string>('');
+  disabled = input<boolean>(false);
 
   @Output() onClick = new EventEmitter();
 

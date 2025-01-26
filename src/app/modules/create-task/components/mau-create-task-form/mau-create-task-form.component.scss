@@ -1,0 +1,15 @@
+:host {
+  form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: relative;
+
+    mau-button {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
+  }
+}

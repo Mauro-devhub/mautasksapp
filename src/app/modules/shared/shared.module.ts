@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
 
 import { MauOverviewComponent } from './components/mau-overview/mau-overview.component';
 import { MauHeaderComponent } from './components/mau-header/mau-header.component';
@@ -14,6 +15,9 @@ import { MauTaskListComponent } from './components/mau-task-list/mau-task-list.c
 import { MauShowContentOrMessageComponent } from './components/mau-show-content-or-message/mau-show-content-or-message.component';
 import { MauInfoMessageComponent } from './components/mau-info-message/mau-info-message.component';
 import { MauCheckboxComponent } from './components/mau-checkbox/mau-checkbox.component';
+import { MauInputComponent } from './components/mau-input/mau-input.component';
+import { MauTextareaComponent } from './components/mau-textarea/mau-textarea.component';
+import { MauDatetimeComponent } from './components/mau-datetime/mau-datetime.component';
 
 @NgModule({
   declarations: [
@@ -28,11 +32,15 @@ import { MauCheckboxComponent } from './components/mau-checkbox/mau-checkbox.com
     MauTaskListComponent,
     MauShowContentOrMessageComponent,
     MauInfoMessageComponent,
-    MauCheckboxComponent
+    MauCheckboxComponent,
+    MauInputComponent,
+    MauTextareaComponent,
+    MauDatetimeComponent
   ],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    FormsModule
   ],
   exports: [
     MauOverviewComponent,
@@ -46,7 +54,10 @@ import { MauCheckboxComponent } from './components/mau-checkbox/mau-checkbox.com
     MauTaskListComponent,
     MauShowContentOrMessageComponent,
     MauInfoMessageComponent,
-    MauCheckboxComponent
+    MauCheckboxComponent,
+    MauInputComponent,
+    MauTextareaComponent,
+    MauDatetimeComponent
   ]
 })
 export class SharedModule {}

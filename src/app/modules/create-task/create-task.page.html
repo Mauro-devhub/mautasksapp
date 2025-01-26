@@ -1,11 +1,11 @@
 <ion-content>
   <mau-overview>
-    <mau-header header>
+    <mau-header 
+      [isBackButtonShown]='isBackButtonShown()'
+      (backButton)='previousPath()' header>
       Create task
     </mau-header>
 
-    <mau-show-content-or-message [hasContent]='true' content>
-      create task work
-    </mau-show-content-or-message>
+    <mau-create-task-form (saveForm)='createTask($event)' content />
   </mau-overview>
 </ion-content>

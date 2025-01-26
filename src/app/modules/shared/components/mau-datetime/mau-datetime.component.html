@@ -1,0 +1,25 @@
+<div>
+  @if (label) {
+    <span>{{ label | uppercase }}</span>
+  }
+
+  <mau-input 
+    id='datetime' 
+    [readonly]='true' 
+    placeholder='select a valid date: MM/DD/YYYY' 
+    [value]='value'
+    [errorMessageInput]='errorMessageDatetime'
+  />
+</div>
+
+<ion-modal #modal trigger='datetime'>
+  <ng-template>
+      <ion-datetime
+        [value]='value'
+        (ngModelChange)='onChange($event)'
+        [(ngModel)]='value'
+        presentation='date'
+        [showDefaultButtons]='true'
+      />
+  </ng-template>
+</ion-modal>
