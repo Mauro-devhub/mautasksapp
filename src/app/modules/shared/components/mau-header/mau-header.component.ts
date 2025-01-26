@@ -1,7 +1,8 @@
 import { Component, effect, EventEmitter, input, OnInit, Output, signal } from '@angular/core';
 
 import { IMauMenuOption } from '../mau-menu-options/interfaces/mau-menu-options.interface';
-import { EMenuOptions } from '../mau-menu-options/enums/mau.menu-options.enums';
+import { EMenuOptionsDefault } from '../mau-menu-options/enums/mau.menu-options.enums';
+import { TMenu } from '../mau-menu-options/types/mau-menu.types';
 
 @Component({
   selector: 'mau-header',
@@ -15,7 +16,7 @@ export class MauHeaderComponent implements OnInit {
   isShownIconTrash = input<boolean>(false);
   isBackButtonShown = input<boolean>(false);
 
-  @Output() optionSelected = new EventEmitter<EMenuOptions>();
+  @Output() optionSelected = new EventEmitter<EMenuOptionsDefault>();
   @Output() removeElements = new EventEmitter();
   @Output() backButton = new EventEmitter();
   @Output() menuOpened = new EventEmitter<boolean>();
@@ -32,20 +33,20 @@ export class MauHeaderComponent implements OnInit {
 
   ngOnInit() {}
 
-  buttonToggleMenu() {
+  buttonToggleMenu(): void {
     this.isShownMenu.set(!this.isShownMenu());
     this.menuOpened.emit(this.isShownMenu());
   }
 
-  optionMenuSelected(e: EMenuOptions) {
-    this.optionSelected.emit(e);
+  optionMenuSelected(e: TMenu): void {
+    this.optionSelected.emit(e as EMenuOptionsDefault);
   }
 
-  removeOption() {
+  removeOption(): void {
     this.removeElements.emit();
   }
 
-  backButtonAction() {
+  backButtonAction(): void {
     this.backButton.emit();
   }
 }

@@ -1,8 +1,8 @@
-import { EMenuOptions } from '../enums/mau.menu-options.enums';
+import { TMenu } from '../types/mau-menu.types';
 
 export interface IMauMenuOption {
   optionName: string;
   iconName: string;
-  action: EMenuOptions;
+  action: TMenu;
   url?: string;
 }

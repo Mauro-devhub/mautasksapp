@@ -6,7 +6,9 @@
       [dateExpire]='task.dateExpire' 
       [processTask]='task.processTask'
       [optionSelected]='optionSelected()'
-      (taskSelected)='itemTaskSelected($event)' 
+      (taskSelected)='itemTaskSelected($event)'
+      [menuOptionsItem]='menuOptions()'
+      (optionMenuSelected)='optionMenuSelected($event)'
     />
   }
 </div>
