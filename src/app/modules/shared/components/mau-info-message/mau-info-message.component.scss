@@ -22,12 +22,20 @@
       justify-content: center;
       align-items: center;
       gap: 20px;
+
+      @media (min-width: 0px) and (max-width: 576px) {
+        width: 250px;
+      }
   
       span {
         text-align: center;
         color: var(--mau-color-light);
         font-weight: 600;
         font-size: 14px;
+
+        @media (min-width: 0px) and (max-width: 576px) {
+          font-size: 10px;
+        }
       }
     }
   }
@@ -35,5 +43,10 @@
   mau-icon {
     --height-icon: 120px;
     --width-icon: 120px;
+
+    @media (min-width: 0px) and (max-width: 576px) {
+      --height-icon: 90px;
+      --width-icon: 90px;
+    }
   }
 }

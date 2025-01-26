@@ -21,8 +21,9 @@
       }
     </span>
   </div>
-  <span>{{ title() }}</span>
-  <span>Exp: {{ dateExpire() | date }}</span>
-  <span>{{ date }}</span>
+  <div>
+    <span>{{ title() }}</span>
+    <span>Exp: {{ dateExpire() | date }}</span>
+  </div>
   <mau-chip [currentProcess]='process()' />
 </div>
