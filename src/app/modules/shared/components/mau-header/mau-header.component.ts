@@ -2,7 +2,6 @@ import { Component, effect, EventEmitter, input, OnInit, Output, signal } from '
 
 import { IMauMenuOption } from '../mau-menu-options/interfaces/mau-menu-options.interface';
 import { EMenuOptionsDefault } from '../mau-menu-options/enums/mau.menu-options.enums';
-import { TMenu } from '../mau-menu-options/types/mau-menu.types';
 
 @Component({
   selector: 'mau-header',
@@ -38,8 +37,8 @@ export class MauHeaderComponent implements OnInit {
     this.menuOpened.emit(this.isShownMenu());
   }
 
-  optionMenuSelected(e: TMenu): void {
-    this.optionSelected.emit(e as EMenuOptionsDefault);
+  optionMenuSelected(e: IMauMenuOption): void {
+    this.optionSelected.emit(e.action as EMenuOptionsDefault);
   }
 
   removeOption(): void {

@@ -1,0 +1,41 @@
+:host {
+  --background-searchbar: var(--mau-color-medium);
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+
+    ion-searchbar {
+      --background: var(--background-searchbar);
+      --border-radius: 10px;
+      --placeholder-color: var(--mau-color-light);
+      --placeholder-opacity: 0.8;
+      --color: var(--mau-color-light);
+      --icon-color: var(--mau-color-light);
+      padding: 0px;
+
+      ::ng-deep {
+        input {
+          @media (min-width: 0px) and (max-width: 576px) {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+
+    span {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    mau-menu-options {
+      --mau-menu-max-width: 110px;
+      position: absolute;
+      right: 0px;
+      top: 50px;
+      z-index: 5;
+    }
+  }
+}

@@ -7,6 +7,12 @@
     width: var(--mau-menu-max-width);
     box-shadow: 0px 5px 10px var(--mau-color-dark);
 
+    &.center-chip {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
     div {
       cursor: pointer;
       display: flex;
@@ -17,6 +23,15 @@
 
       mau-icon {
         margin-top: 3px;
+      }
+
+      &.center-element-without-icon {
+        justify-content: center;
+      }
+
+      span {
+        font-size: 14px;
+        font-weight: 500;
       }
 
       &:hover {

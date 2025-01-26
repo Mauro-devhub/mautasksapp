@@ -1,0 +1,19 @@
+@if (isShownMenu()) {
+  <mau-backdrop [isBackdropVisible]='true' (backdropClicked)='backdropClicked($event)'/>
+}
+<div>
+  <ion-searchbar 
+    (ionInput)='onChange($event)'
+    [placeholder]='placeholder()'
+  />
+
+  @if (isShownBtnFilter()) {
+    <mau-button (onClick)='buttonToggleMenu()'>
+      Filter By
+    </mau-button>
+  }
+
+  @if (menuOptions().length > 0 && isShownMenu()) {
+    <mau-menu-options [menuOptions]='menuOptions()' (setOptionSelected)='optionMenuSelected($event)' />
+  }
+</div>

@@ -8,5 +8,10 @@
     height: var(--button-height);
     width: var(--button-width);
     --background: var(--button-background);
+
+    &::part(native) {
+      font-size: 8px;
+      font-weight: 500;
+    }
   }
 }
