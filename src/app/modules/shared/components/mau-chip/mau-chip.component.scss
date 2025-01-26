@@ -16,7 +16,7 @@
   }
 
   .success {
-    --background: var(--mau-color);
+    --background: var(--mau-color-success-light);
     --color: var(--mau-color-dark);
     
     span {
@@ -25,13 +25,13 @@
   }
 
   .pending {
-    --background: #00213f;
-    --color: #adefd1;
+    --background: var(--mau-color-warning);
+    --color: var(--mau-color-warning-dark);
   }
 
   .danger {
-    --background: #00213f;
-    --color: #adefd1;
+    --background: var(--mau-color-danger);
+    --color: var(--mau-color-danger-dark);
 
     span {
       text-decoration: line-through;

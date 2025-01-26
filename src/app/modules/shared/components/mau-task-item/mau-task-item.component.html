@@ -1,16 +1,28 @@
+@if (isShownMenu()) {
+  <mau-backdrop [isBackdropVisible]='true' (backdropClicked)='backdropClicked($event)'/>
+}
 <div>
-  <span>
-    @if (optionSelected() == 'DELETE') {
-      <mau-checkbox [value]='idTask()' (checkboxSelected)='itemTaskSelected($event)' />
-    }
-
-    @if (optionSelected() == 'EDIT') {
-      <mau-icon name='create-outline' (click)='itemTaskToEdit()' />
-    }
-  </span>
-  <span>{{ title() }}</span>
   <div>
-    <span>{{ date }}</span>
-    <mau-chip [currentProcess]='processTask()' />
+    <span>
+      @if (optionSelected() == 'DELETE') {
+        <mau-checkbox [value]='idTask()' (checkboxSelected)='itemTaskSelected($event)' />
+      }
+  
+      @if (optionSelected() == 'EDIT') {
+        <mau-icon name='create-outline' (click)='itemTaskToEdit()' />
+      }
+
+      @if (optionSelected() == null) {
+        <mau-icon name='ellipsis-horizontal-outline' (click)='buttonToggleMenu()' />
+      }
+
+      @if (optionSelected() == null && menu().length > 0 && isShownMenu()) {
+        <mau-menu-options [menuOptions]='menu()' (setOptionSelected)='optionMenuItemSelected($event)' />
+      }
+    </span>
   </div>
+  <span>{{ title() }}</span>
+  <span>Exp: {{ dateExpire() | date }}</span>
+  <span>{{ date }}</span>
+  <mau-chip [currentProcess]='process()' />
 </div>

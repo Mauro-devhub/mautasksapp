@@ -1,7 +1,7 @@
 import { Component, EventEmitter, input, OnInit, Output } from '@angular/core';
 
 import { IMauMenuOption } from './interfaces/mau-menu-options.interface';
-import { EMenuOptions } from './enums/mau.menu-options.enums';
+import { TMenu } from './types/mau-menu.types';
 
 @Component({
   selector: 'mau-menu-options',
@@ -12,13 +12,13 @@ import { EMenuOptions } from './enums/mau.menu-options.enums';
 export class MauMenuOptionsComponent implements OnInit {
   menuOptions = input.required<IMauMenuOption[]>();
 
-  @Output() setOptionSelected = new EventEmitter<EMenuOptions>();
+  @Output() setOptionSelected = new EventEmitter<TMenu>();
 
   constructor() { }
 
   ngOnInit() {}
 
-  optionSelected(optionAction: EMenuOptions) {
+  optionSelected(optionAction: TMenu): void {
     this.setOptionSelected.emit(optionAction);
   }
 
