@@ -28,7 +28,9 @@
   />
 
   @if (task()) {
-    <mau-chip label='select state task' (click)='toggleMenu()' [currentState]='stateTask()' />
+    <div (click)='toggleMenu()'>
+      <mau-chip label='select state task' [currentState]='stateTask()' />
+    </div>
   }
 
   @if (task() && menuOptionsTask().length > 0 && isShownMenuOption() && !validation()) {
@@ -48,6 +50,10 @@
       )
     '
     type='submit'>
-    <mau-icon name='add' />
+      @if (task()) {
+        <mau-icon name='refresh-circle-outline' />
+      } @else { 
+        <mau-icon name='add' />
+      }
   </mau-button>
 </form>
