@@ -2,12 +2,14 @@
   --button-height: 40px;
   --button-width: 40px;
   --button-background: var(--mau-color-dark);
+  --button-border-radius: 10px;
 
   ion-button {
     margin: 0px;
     height: var(--button-height);
     width: var(--button-width);
     --background: var(--button-background);
+    --border-radius: var(--button-border-radius);
 
     &::part(native) {
       font-size: 8px;

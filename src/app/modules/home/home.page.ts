@@ -9,8 +9,8 @@ import { ERROR_MESSAGES } from 'src/app/modules/shared/contants/error-messages.c
 import { MENU_OPTIONS, MENU_OPTIONS_TASK, MENU_OPTIONS_SEARCH_BAR } from 'src/app/modules/shared/contants/menu-options.constants';
 import { NAVIGATE_URL } from 'src/app/modules/shared/enums/navigate-url.enum';
 import { filterByElement } from 'src/app/modules/shared/utils/filters.utils';
-import { TaskModel } from '../../model/task.model';
-import { TaskService } from '../../services/task.service';
+import { TaskModel } from '../task/model/task.model';
+import { TaskService } from '../task/services/task.service';
 
 @Component({
   selector: 'page-home',

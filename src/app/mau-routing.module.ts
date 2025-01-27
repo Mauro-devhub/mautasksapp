@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./modules/task/pages/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./modules/home/home.module').then( m => m.HomePageModule)
   },
   {
     path: 'create-task',
