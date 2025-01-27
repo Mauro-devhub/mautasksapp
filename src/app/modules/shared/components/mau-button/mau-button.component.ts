@@ -14,9 +14,9 @@ export class MauButtonComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
-  setClick() {
+  setClick(): void {
     this.onClick.emit();
   }
 

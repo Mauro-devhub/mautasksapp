@@ -23,18 +23,21 @@ export class DetailsTaskPage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.setTaskDetails();
   }
 
-  setTaskDetails() {
+  setTaskDetails(): void {
     const taskIndex = this.tasks().findIndex((e) => e.id === this.taskId);
     if (taskIndex !== -1) {
-      this.task = this.tasks()[taskIndex];
+      this.task = this.tasks()[taskIndex]; 
+      return;
     }
+
+    this.task = new TaskModel();
   }
 
-  backPath() {
+  backPath(): void {
     this.route.navigateByUrl('/');
   }
 

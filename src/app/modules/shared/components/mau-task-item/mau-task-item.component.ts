@@ -1,10 +1,11 @@
-import { Component, computed, effect, EventEmitter, input, OnInit, Output, signal } from '@angular/core';
+import { Component, computed, effect, EventEmitter, inject, input, OnInit, Output, signal } from '@angular/core';
 
 import { EMenuOptionsDefault, EMenuOptionsState } from '../mau-menu-options/enums/mau.menu-options.enums';
 import { IMauMenuOption } from '../mau-menu-options/interfaces/mau-menu-options.interface';
 import { TMenu } from '../mau-menu-options/types/mau-menu.types';
 import { isBeforeUtils } from '../../utils/date.utils';
 import { EStateTask } from '../mau-chip/enums/mau-chip.enums';
+import { TaskService } from 'src/app/modules/task/services/task.service';
 
 @Component({
   selector: 'mau-task-item',
@@ -18,13 +19,15 @@ export class MauTaskItemComponent implements OnInit {
   dateExpire = input.required<string>();
   stateTask = input.required<EStateTask>();
   optionSelected = input.required<EMenuOptionsDefault | null>();
-  isMenuOpen = input
-  
   menuOptionsItem = input<IMauMenuOption[]>([]);
+  
   isShownMenu = signal<boolean>(false);
+  validation = signal<boolean>(false);
   
   state = computed(() => this.stateTask());
   menu = computed<IMauMenuOption[]>(() => this.menuOptionsItem());
+
+  taskService = inject(TaskService);
 
   @Output() taskSelected = new EventEmitter<number>();
   @Output() optionMenuSelected = new EventEmitter<{id: number, option: TMenu}>();
@@ -50,10 +53,19 @@ export class MauTaskItemComponent implements OnInit {
       if (this.state() === EStateTask.PENDING) {
         this.menu = computed(() => this.menuOptionsItem().filter((e) => e.action !== EMenuOptionsDefault.DELETE && e.action !== EMenuOptionsState.PENDING));
       }
+
+      this.validation.set( 
+        this.stateTask() == EStateTask.EXPIRED ||
+        this.stateTask() == EStateTask.DONE && isBeforeUtils(new Date(this.dateExpire() as unknown as Date), new Date())
+      );
     })
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (isBeforeUtils(new Date(this.dateExpire()), new Date())) {
+      this.taskService.changueStateTask(this.idTask(), EStateTask.EXPIRED);
+    };
+  }
 
   optionMenuItemSelected(e: IMauMenuOption): void {
     this.optionMenuSelected.emit({id: this.idTask(), option: e.action});
