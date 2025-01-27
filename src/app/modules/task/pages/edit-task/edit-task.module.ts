@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { EditTaskPageRoutingModule } from './edit-task-routing.module';
 import { EditTaskPage } from './edit-task.page';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { CreateTasksComponentsModule } from '../../components/create-task-components.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
     CommonModule,
     IonicModule,
     EditTaskPageRoutingModule,
-    SharedModule
+    SharedModule,
+    CreateTasksComponentsModule
   ],
   declarations: [EditTaskPage]
 })

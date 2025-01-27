@@ -69,3 +69,18 @@ export const MENU_OPTIONS_SEARCH_BAR: IMauMenuOption[] = [
     action: EMenuOptionsDefault.FILTER
   }
 ];
+
+export const MENU_OPTIONS_STATE: IMauMenuOption[] = [
+  {
+    optionName: EMenuOptionsState.DONE,
+    action: EMenuOptionsState.DONE
+  },
+  {
+    optionName: EMenuOptionsState.PENDING,
+    action: EMenuOptionsState.PENDING
+  },
+  {
+    optionName: EMenuOptionsState.EXPIRED,
+    action: EMenuOptionsState.EXPIRED
+  }
+]

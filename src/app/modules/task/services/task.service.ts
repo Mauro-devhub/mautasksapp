@@ -4,6 +4,7 @@ import { TaskModel } from '../model/task.model';
 import { CreateTaskDTO } from '../dtos/create-task.dto';
 import { formatUtils } from '../../shared/utils/date.utils';
 import { EStateTask } from '../../shared/components/mau-chip/enums/mau-chip.enums';
+import { UpdateTaskDTO } from '../dtos/update-task.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -26,45 +27,10 @@ export class TaskService {
     },
     {
       id: 2,
-      title: 'jose',
+      title: 'joses',
       description: 'jhkgbh',
       stateTask: EStateTask.PENDING,
       dateExpire: '01/28/2025'
-    },
-    {
-      id: 3,
-      title: 'camil',
-      description: 'jhkgbh',
-      stateTask: EStateTask.DONE,
-      dateExpire: '01/23/2025'
-    },
-    {
-      id: 4,
-      title: 'carlo',
-      description: 'jhkgbh',
-      stateTask: EStateTask.EXPIRED,
-      dateExpire: '01/21/2025'
-    },
-    {
-      id: 5,
-      title: 'jose',
-      description: 'jhkgbh',
-      stateTask: EStateTask.PENDING,
-      dateExpire: '01/28/2025'
-    },
-    {
-      id: 6,
-      title: 'camil',
-      description: 'jhkgbh',
-      stateTask: EStateTask.DONE,
-      dateExpire: '01/23/2025'
-    },
-    {
-      id: 7,
-      title: 'carlo',
-      description: 'jhkgbh',
-      stateTask: EStateTask.EXPIRED,
-      dateExpire: '01/21/2025'
     }
   ]);
   
@@ -88,6 +54,27 @@ export class TaskService {
     const tasks = [...this.tasks(), newTask];
 
     this.tasks.set(tasks);
+  }
+
+  updateTask(taskId: number, updateTaskDto: UpdateTaskDTO) {
+    const tasks = this.tasks().map((e) => {
+      if (e.id === taskId) {
+        return {...e, ...updateTaskDto};
+      }
+
+      return e;
+    })
+
+    this.tasks.set(tasks);
+  }
+
+  findTaskById(taskId: number): TaskModel {
+    const task = this.tasks().find((e) => e.id === taskId);
+    if (!!task) {
+      return task;
+    }
+
+    return new TaskModel();
   }
 
   changueStateTask(taskId: number, state: EStateTask) {

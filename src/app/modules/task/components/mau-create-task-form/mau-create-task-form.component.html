@@ -1,5 +1,9 @@
+@if (isShownMenuOption()) {
+  <mau-backdrop [isBackdropVisible]='true' (backdropClicked)='backdropClicked($event)'/>
+}
 <form [formGroup]='formGroupCreateTask' (submit)='save()'>
   <mau-input 
+    [readonly]='validation()'
     formControlName='title' 
     [errorMessageInput]='errorMessageInputTitle()' 
     label='title' 
@@ -7,6 +11,7 @@
   />
 
   <mau-textarea 
+    [readonly]='validation()'
     formControlName='description' 
     [errorMessageTextarea]='errorMessageTextarea()'
     label='description' 
@@ -14,6 +19,7 @@
   />
 
   <mau-datetime
+    [readonly]='validation()'
     formControlName='dateExpire'
     [min]='minDate'
     [value]='datetimeDefault'
@@ -21,7 +27,16 @@
     label='expiration date' 
   />
 
+  @if (task()) {
+    <mau-chip label='select state task' (click)='toggleMenu()' [currentState]='stateTask()' />
+  }
+
+  @if (task() && menuOptionsTask().length > 0 && isShownMenuOption() && !validation()) {
+    <mau-menu-options [menuOptions]='menuOptionsTask()' (setOptionSelected)='optionMenuSelected($event)' />
+  }
+
   <mau-button 
+    *ngIf='!validation()'
     [disabled]='
       !formGroupCreateTask.valid ||
       !formGroupCreateTask.controls["title"].valid ||
