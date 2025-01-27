@@ -1,5 +1,33 @@
 <ion-content>
   <mau-overview>
-    <p>Details tasks works</p>
+    <mau-header 
+      [isBackButtonShown]='true'
+      (backButton)='backPath()'
+      header
+    >
+      {{ 'Details Task #' + taskId }}
+    </mau-header>
+    
+    <div content>
+      <mau-input 
+        label='title'
+        [value]='task.title'
+        [readonly]='true' 
+      />
+
+      <mau-textarea 
+        label='description'
+        [readonly]='true'
+        [value]='task.description'
+      />
+
+      <mau-datetime
+        label='expiration date'
+        [readonly]='true'
+        [value]='task.dateExpire'
+      />
+
+      <mau-chip label='current state' [currentState]='task.stateTask' />
+    </div>
   </mau-overview>
 </ion-content>

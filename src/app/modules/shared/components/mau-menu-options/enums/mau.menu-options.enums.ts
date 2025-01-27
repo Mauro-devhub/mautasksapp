@@ -12,6 +12,7 @@ export enum EMenuOptionsState {
 }
 
 export enum ECustomOptions {
-  EXP_DATE='EXP DATE',
+  EXP_DATE_ASC='EXP DATE ASC',
+  EXP_DATE_DESC='EXP DATE DESC',
   SHOW_ALL='SHOW ALL'
 }

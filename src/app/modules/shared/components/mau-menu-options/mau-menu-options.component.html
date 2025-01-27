@@ -2,7 +2,7 @@
   @for (option of menuOptions(); track $index) {
     <div (click)='optionSelected(option)' [class.center-element-without-icon]='!option?.hasChip && !option.iconName' [class.center-chip]='option.hasChip'>
       @if (option.hasChip) {
-        <mau-chip [currentProcess]='option.optionName' />
+        <mau-chip [currentState]='option.optionName' />
       } @else {
         <span>
           {{ option.optionName }}

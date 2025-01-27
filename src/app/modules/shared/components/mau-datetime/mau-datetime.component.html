@@ -4,10 +4,10 @@
   }
 
   <mau-input 
-    id='datetime' 
-    [readonly]='true' 
+    [id]='!readonly ? "datetime" : ""'
+    [readonly]='true'
     placeholder='select a valid date: MM/DD/YYYY' 
-    [value]='value'
+    [value]='value | date'
     [errorMessageInput]='errorMessageDatetime'
   />
 </div>
@@ -15,6 +15,7 @@
 <ion-modal #modal trigger='datetime'>
   <ng-template>
       <ion-datetime
+        [min]='min'
         [value]='value'
         (ngModelChange)='onChange($event)'
         [(ngModel)]='value'

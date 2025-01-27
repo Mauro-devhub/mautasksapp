@@ -1,6 +1,6 @@
 import { Component, effect, input, OnInit, signal } from '@angular/core';
 
-import { EMauChip, EProcessChip } from './enums/mau-chip.enums';
+import { EMauChip, EStateTask } from './enums/mau-chip.enums';
 
 @Component({
   selector: 'mau-chip',
@@ -9,24 +9,25 @@ import { EMauChip, EProcessChip } from './enums/mau-chip.enums';
   standalone: false
 })
 export class MauChipComponent implements OnInit {
-  currentProcess = input.required<string>();
+  currentState = input.required<string>();
+  label = input<string>('');
   
   color = signal<EMauChip>(EMauChip.PENDING);
 
   constructor() {
     effect(() => {
-      this.color.set(this.setColor(this.currentProcess() as EProcessChip));
+      this.color.set(this.setColor(this.currentState() as EStateTask));
     })
   }
 
   ngOnInit() {}
 
-  setColor(type: EProcessChip): EMauChip {
-    if (type == EProcessChip.DONE) {
+  setColor(type: EStateTask): EMauChip {
+    if (type == EStateTask.DONE) {
       return EMauChip.SUCCESS;
     }
 
-    if (type == EProcessChip.EXPIRED) {
+    if (type == EStateTask.EXPIRED) {
       return EMauChip.DANGER;
     }
 

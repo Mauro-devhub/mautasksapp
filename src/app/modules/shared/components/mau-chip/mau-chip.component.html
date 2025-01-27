@@ -1,7 +1,11 @@
 <div>
+  @if (label()) {
+    <p>{{ label() | uppercase }}</p>
+  }
+
   <ion-chip [ngClass]='color().toLowerCase()'>
     <span>
-      {{ currentProcess() | uppercase }}
+      {{ currentState() | uppercase }}
     </span>
   </ion-chip>
 </div>

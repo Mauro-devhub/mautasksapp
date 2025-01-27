@@ -18,6 +18,8 @@ export class MauDatetimeComponent implements OnInit, ControlValueAccessor {
   @Input() value: any = '';
   @Input() label: string = '';
   @Input() errorMessageDatetime: string = '';
+  @Input() min: string = '';
+  @Input() readonly: boolean = false;
 
   onChange = (_:any) => { };
   onTouch = () => { };

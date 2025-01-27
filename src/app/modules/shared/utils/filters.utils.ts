@@ -8,7 +8,7 @@ export const filterByElement = <T>(attr: any, obj: any, el: any): T[] => {
   return obj;
 }
 
-export const filterByExpirationDate = (items: any[]) => {
+export const filterByExpirationDateOrderDesc = (items: any[]) => {
   return items.sort((a, b) => {
     const dateA = new Date(a.dateExpire);
     const dateB = new Date(b.dateExpire);

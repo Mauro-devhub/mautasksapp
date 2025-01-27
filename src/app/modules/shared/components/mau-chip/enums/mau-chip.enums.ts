@@ -4,7 +4,7 @@ export enum EMauChip {
   DANGER='DANGER'
 }
 
-export enum EProcessChip {
+export enum EStateTask {
   PENDING='PENDING',
   DONE='DONE',
   EXPIRED='EXPIRED'
