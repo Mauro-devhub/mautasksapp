@@ -31,8 +31,8 @@ export class MauCreateTaskFormComponent implements OnInit, OnDestroy {
 
   isShownMenuOption = signal<boolean>(false);
 
-  minDate: string = new Date().toISOString();
   datetimeDefault = new Date(addDaysUtils(new Date(), 1)).toISOString();
+  minDate: string = new Date(this.datetimeDefault).toISOString();
 
   subscription!: Subscription;
 
@@ -49,11 +49,11 @@ export class MauCreateTaskFormComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.setForm(this.task());
   }
 
-  setForm(task?: TaskModel) {
+  setForm(task?: TaskModel): void {
     this.formGroupCreateTask = this.formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(5)]],
       description: ['', Validators.required],
@@ -72,7 +72,7 @@ export class MauCreateTaskFormComponent implements OnInit, OnDestroy {
     })
   }
 
-  validationsForm() {
+  validationsForm(): void {
     this.errorMessageInputTitle.set('');
     this.errorMessageTextarea.set('');
     this.errorMessageDatetime.set('');
@@ -107,19 +107,19 @@ export class MauCreateTaskFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggleMenu() {
+  toggleMenu(): void {
     if (this.stateTask() !== EStateTask.EXPIRED) {
       this.isShownMenuOption.set(!this.isShownMenuOption());
     }
   }
 
-  optionMenuSelected(e: IMauMenuOption) {
+  optionMenuSelected(e: IMauMenuOption): void {
     this.stateTask = computed(() => e.optionName as EStateTask);
     this.formGroupCreateTask.controls['stateTask'].setValue(this.stateTask());
     this.isShownMenuOption.set(false);
   }
 
-  backdropClicked(e: any) {
+  backdropClicked(e: any): void {
     this.isShownMenuOption.set(false);
   }
 

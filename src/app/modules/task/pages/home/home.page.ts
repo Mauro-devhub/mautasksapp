@@ -56,7 +56,7 @@ export class HomePage {
     }
   }
 
-  menuSearchBarOpened(e: boolean) {
+  menuSearchBarOpened(e: boolean): void {
     this.optionSelected.set(null);
     this.isBackButtonShown.set(false);
     this.isMenuOpen.set(false);
@@ -132,6 +132,7 @@ export class HomePage {
         
         return dateA.getTime() - dateB.getTime();
       }));
+
       return;
     }
 
@@ -142,6 +143,7 @@ export class HomePage {
         
         return dateB.getTime() - dateA.getTime();
       }));
+
       return;
     }
     

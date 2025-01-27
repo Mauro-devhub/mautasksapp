@@ -8,7 +8,7 @@
         <mau-checkbox [value]='idTask()' (checkboxSelected)='itemTaskSelected($event)' />
       }
   
-      @if (optionSelected() == 'EDIT') {
+      @if (optionSelected() == 'EDIT' && !validation()) {
         <mau-icon name='create-outline' (click)='itemTaskToEdit()' />
       }
 
