@@ -9,19 +9,19 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./modules/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./modules/task/pages/home/home.module').then( m => m.HomePageModule)
   },
   {
     path: 'create-task',
-    loadChildren: () => import('./modules/create-task/create-task.module').then( m => m.CreateTaskPageModule)
+    loadChildren: () => import('./modules/task/pages/create-task/create-task.module').then( m => m.CreateTaskPageModule)
   },
   {
     path: 'details-task/:id',
-    loadChildren: () => import('./modules/details-task/details-task.module').then( m => m.DetailsTaskPageModule)
+    loadChildren: () => import('./modules/task/pages/details-task/details-task.module').then( m => m.DetailsTaskPageModule)
   },
   {
     path: 'edit-task/:id',
-    loadChildren: () => import('./modules/edit-task/edit-task.module').then( m => m.EditTaskPageModule)
+    loadChildren: () => import('./modules/task/pages/edit-task/edit-task.module').then( m => m.EditTaskPageModule)
   }
 ];
 

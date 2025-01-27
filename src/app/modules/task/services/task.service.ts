@@ -1,9 +1,9 @@
 import { effect, Injectable, signal } from '@angular/core';
 
 import { TaskModel } from '../model/task.model';
-import { CreateTaskDTO } from '../create-task/dtos/create-task.dto';
-import { formatUtils } from '../shared/utils/date.utils';
-import { EStateTask } from '../shared/components/mau-chip/enums/mau-chip.enums';
+import { CreateTaskDTO } from '../dtos/create-task.dto';
+import { formatUtils } from '../../shared/utils/date.utils';
+import { EStateTask } from '../../shared/components/mau-chip/enums/mau-chip.enums';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,41 @@ export class TaskService {
       description: 'jhkgbh',
       stateTask: EStateTask.PENDING,
       dateExpire: '01/28/2025'
+    },
+    {
+      id: 3,
+      title: 'camil',
+      description: 'jhkgbh',
+      stateTask: EStateTask.DONE,
+      dateExpire: '01/23/2025'
+    },
+    {
+      id: 4,
+      title: 'carlo',
+      description: 'jhkgbh',
+      stateTask: EStateTask.EXPIRED,
+      dateExpire: '01/21/2025'
+    },
+    {
+      id: 5,
+      title: 'jose',
+      description: 'jhkgbh',
+      stateTask: EStateTask.PENDING,
+      dateExpire: '01/28/2025'
+    },
+    {
+      id: 6,
+      title: 'camil',
+      description: 'jhkgbh',
+      stateTask: EStateTask.DONE,
+      dateExpire: '01/23/2025'
+    },
+    {
+      id: 7,
+      title: 'carlo',
+      description: 'jhkgbh',
+      stateTask: EStateTask.EXPIRED,
+      dateExpire: '01/21/2025'
     }
   ]);
   

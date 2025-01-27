@@ -1,4 +1,4 @@
-import { EStateTask } from '../shared/components/mau-chip/enums/mau-chip.enums';
+import { EStateTask } from '../../shared/components/mau-chip/enums/mau-chip.enums';
 
 export class TaskModel {
   id!: number;

@@ -1,16 +1,16 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { IMauMenuOption } from '../shared/components/mau-menu-options/interfaces/mau-menu-options.interface';
-import { ECustomOptions, EMenuOptionsDefault } from '../shared/components/mau-menu-options/enums/mau.menu-options.enums';
-import { MENU_OPTIONS, MENU_OPTIONS_SEARCH_BAR, MENU_OPTIONS_TASK } from '../shared/contants/menu-options.constants';
-import { NAVIGATE_URL } from '../shared/enums/navigate-url.enum';
-import { EStateTask } from '../shared/components/mau-chip/enums/mau-chip.enums';
-import { TMenu } from '../shared/components/mau-menu-options/types/mau-menu.types';
-import { ERROR_MESSAGES } from '../shared/contants/error-messages.contant';
-import { filterByElement } from '../shared/utils/filters.utils';
-import { TaskService } from '../services/task.service';
-import { TaskModel } from '../model/task.model';
+import { EStateTask } from 'src/app/modules/shared/components/mau-chip/enums/mau-chip.enums';
+import { EMenuOptionsDefault, ECustomOptions } from 'src/app/modules/shared/components/mau-menu-options/enums/mau.menu-options.enums';
+import { IMauMenuOption } from 'src/app/modules/shared/components/mau-menu-options/interfaces/mau-menu-options.interface';
+import { TMenu } from 'src/app/modules/shared/components/mau-menu-options/types/mau-menu.types';
+import { ERROR_MESSAGES } from 'src/app/modules/shared/contants/error-messages.contant';
+import { MENU_OPTIONS, MENU_OPTIONS_TASK, MENU_OPTIONS_SEARCH_BAR } from 'src/app/modules/shared/contants/menu-options.constants';
+import { NAVIGATE_URL } from 'src/app/modules/shared/enums/navigate-url.enum';
+import { filterByElement } from 'src/app/modules/shared/utils/filters.utils';
+import { TaskModel } from '../../model/task.model';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'page-home',
@@ -38,6 +38,7 @@ export class HomePage {
   menuOptions: IMauMenuOption[] = MENU_OPTIONS;
   menuOptionsTask: IMauMenuOption[] = MENU_OPTIONS_TASK;
   menuOptionsSearchBar: IMauMenuOption[] = MENU_OPTIONS_SEARCH_BAR;
+  menuUniqueOptionIsCreate: IMauMenuOption[] = MENU_OPTIONS.filter((e) => e.action === EMenuOptionsDefault.CREATE);
 
   constructor() { }
 

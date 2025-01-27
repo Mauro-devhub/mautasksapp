@@ -4,7 +4,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { EditTaskPageRoutingModule } from './edit-task-routing.module';
 import { EditTaskPage } from './edit-task.page';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
+
 
 @NgModule({
   imports: [

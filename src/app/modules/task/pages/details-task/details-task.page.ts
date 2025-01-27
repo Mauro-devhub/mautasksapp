@@ -1,8 +1,8 @@
 import { Component, computed, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { TaskService } from '../services/task.service';
-import { TaskModel } from '../model/task.model';
+import { TaskService } from '../../services/task.service';
+import { TaskModel } from '../../model/task.model';
 
 @Component({
   selector: 'page-details-task',
