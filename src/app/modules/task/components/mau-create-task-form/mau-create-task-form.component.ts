@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, OnDestroy, OnInit, Output, signal } from '@angular/core';
+import { Component, computed, effect, EventEmitter, inject, input, OnDestroy, OnInit, Output, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -6,6 +6,8 @@ import { ERROR_MESSAGES } from 'src/app/modules/shared/contants/error-messages.c
 import { CreateTaskDTO } from '../../dtos/create-task.dto';
 import { addDaysUtils, isBeforeUtils } from 'src/app/modules/shared/utils/date.utils';
 import { EStateTask } from 'src/app/modules/shared/components/mau-chip/enums/mau-chip.enums';
+import { TaskModel } from '../../model/task.model';
+import { IMauMenuOption } from 'src/app/modules/shared/components/mau-menu-options/interfaces/mau-menu-options.interface';
 
 @Component({
   selector: 'mau-create-task-form',
@@ -17,9 +19,17 @@ export class MauCreateTaskFormComponent implements OnInit, OnDestroy {
   formBuilder = inject(FormBuilder);
   formGroupCreateTask!: FormGroup;
 
+  task = input<TaskModel>();
+  menuOptionsTask = input<IMauMenuOption[]>([]);
+
+  stateTask = computed(() => this.task()?.stateTask as EStateTask);
+  validation = signal<boolean>(false);
+
   errorMessageInputTitle = signal<string>('');
   errorMessageTextarea = signal<string>('');
   errorMessageDatetime = signal<string>('');
+
+  isShownMenuOption = signal<boolean>(false);
 
   minDate: string = new Date().toISOString();
   datetimeDefault = new Date(addDaysUtils(new Date(), 1)).toISOString();
@@ -28,19 +38,32 @@ export class MauCreateTaskFormComponent implements OnInit, OnDestroy {
 
   @Output() saveForm = new EventEmitter<CreateTaskDTO>();
 
-  constructor() { }
+  constructor() { 
+    effect(() => {
+      this.task();
 
-  ngOnInit() {
-    this.setForm();
+      this.validation.set( 
+        this.stateTask() == EStateTask.EXPIRED ||
+        this.stateTask() == EStateTask.DONE && isBeforeUtils(new Date(this.task()?.dateExpire as unknown as Date), new Date())
+      );
+    })
   }
 
-  setForm() {
+  ngOnInit() {
+    this.setForm(this.task());
+  }
+
+  setForm(task?: TaskModel) {
     this.formGroupCreateTask = this.formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(5)]],
       description: ['', Validators.required],
       dateExpire: ['', Validators.required],
       stateTask: [EStateTask.PENDING]
     })
+
+    if (task) {
+      this.formGroupCreateTask.patchValue(task);
+    }
 
     this.formGroupCreateTask.controls['dateExpire'].setValue(this.datetimeDefault);
 
@@ -82,6 +105,22 @@ export class MauCreateTaskFormComponent implements OnInit, OnDestroy {
     if (isBeforeUtils(new Date(this.formGroupCreateTask.controls['dateExpire'].value), new Date()) && this.formGroupCreateTask.controls['dateExpire'].dirty) {
       this.errorMessageDatetime.set(ERROR_MESSAGES.INVALID_DATE);
     }
+  }
+
+  toggleMenu() {
+    if (this.stateTask() !== EStateTask.EXPIRED) {
+      this.isShownMenuOption.set(!this.isShownMenuOption());
+    }
+  }
+
+  optionMenuSelected(e: IMauMenuOption) {
+    this.stateTask = computed(() => e.optionName as EStateTask);
+    this.formGroupCreateTask.controls['stateTask'].setValue(this.stateTask());
+    this.isShownMenuOption.set(false);
+  }
+
+  backdropClicked(e: any) {
+    this.isShownMenuOption.set(false);
   }
 
   save(): void {
