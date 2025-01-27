@@ -42,6 +42,10 @@ body {
 
 ion-content {
   --background: var(--mau-color-dark);
+  
+  &::part(scroll) {
+    --overflow: hidden;
+  }
 }
 
 ion-backdrop {

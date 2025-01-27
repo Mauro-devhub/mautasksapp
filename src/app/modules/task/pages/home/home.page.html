@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content [scrollX]='false'>
   @if (isMenuOpen()) {
     <mau-backdrop [isBackdropVisible]='true' (backdropClicked)='backdropClicked($event)'/>
   }

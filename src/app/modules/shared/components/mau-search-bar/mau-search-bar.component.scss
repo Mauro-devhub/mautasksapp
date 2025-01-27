@@ -25,6 +25,12 @@
       }
     }
 
+    mau-button {
+      @media (min-width: 0px) and (max-width: 576px) {
+        --button-border-radius: 5px;
+      }
+    }
+
     span {
       font-size: 12px;
       font-weight: 500;

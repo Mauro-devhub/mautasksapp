@@ -18,11 +18,18 @@
       border-radius: 10px;
       
       &:nth-child(2) {
-        overflow-y: scroll;
+        padding: 30px;
+
+        @media (min-width: 0px) and (max-width: 576px) {
+          padding: 10px;
+          height: inherit;
+        }
       }
 
       @media (min-width: 0px) and (max-width: 576px) {
-        height: 100%;
+        height: inherit;
+        display: flex;
+        flex-direction: column;
       }
   
       @media (min-width: 576px) and (max-width: 768px) {
@@ -33,10 +40,6 @@
       @media (min-width: 768px) {
         height: 650px;
         width: 650px;
-      }
-
-      div {
-        padding: 30px;
       }
     }
   }
