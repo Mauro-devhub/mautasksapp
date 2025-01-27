@@ -1,8 +1,8 @@
-import { EProcessChip } from '../../mau-chip/enums/mau-chip.enums';
+import { EStateTask } from '../../mau-chip/enums/mau-chip.enums';
 
-export interface ITasks {
+export interface ITask {
   id: number;
   title: string;
   dateExpire: string;
-  processTask: EProcessChip;
+  stateTask: EStateTask;
 }

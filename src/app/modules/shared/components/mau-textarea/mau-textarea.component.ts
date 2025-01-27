@@ -19,6 +19,7 @@ export class MauTextareaComponent implements OnInit, ControlValueAccessor {
   placeholder = input<string>('');
   label = input<string>('');
   errorMessageTextarea = input<string>('');
+  readonly = input<boolean>(false);
 
   disabled: boolean = false;
 

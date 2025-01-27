@@ -19,6 +19,7 @@ import { MauInputComponent } from './components/mau-input/mau-input.component';
 import { MauTextareaComponent } from './components/mau-textarea/mau-textarea.component';
 import { MauDatetimeComponent } from './components/mau-datetime/mau-datetime.component';
 import { MauSearchBarComponent } from './components/mau-search-bar/mau-search-bar.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { MauSearchBarComponent } from './components/mau-search-bar/mau-search-ba
   imports: [
     CommonModule,
     IonicModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   exports: [
     MauOverviewComponent,

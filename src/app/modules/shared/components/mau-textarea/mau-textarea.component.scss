@@ -2,6 +2,7 @@
   --background-color-input: var(--mau-color-medium);
   --border-radius-input: 10px;
   --color-input: var(--mau-color-light);
+  --cursor-textarea: text;
 
   div {
     display: flex;
@@ -16,6 +17,7 @@
     }
 
     textarea {
+      cursor: var(--cursor-textarea);
       background: var(--background-color-input);
       border-radius: var(--border-radius-input);
       color: var(--color-input);

@@ -42,7 +42,11 @@ export const MENU_OPTIONS_TASK: IMauMenuOption[] = [
 
 export const MENU_OPTIONS_SEARCH_BAR: IMauMenuOption[] = [
   {
-    optionName: ECustomOptions.EXP_DATE,
+    optionName: ECustomOptions.EXP_DATE_ASC,
+    action: EMenuOptionsDefault.FILTER
+  },
+  {
+    optionName: ECustomOptions.EXP_DATE_DESC,
     action: EMenuOptionsDefault.FILTER
   },
   {

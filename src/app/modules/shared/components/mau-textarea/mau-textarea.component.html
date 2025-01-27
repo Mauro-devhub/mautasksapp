@@ -4,6 +4,7 @@
   }
 
   <textarea
+    [readOnly]='readonly()'
     [placeholder]='placeholder()'
     (ngModelChange)='onChange($event)'
     [(ngModel)]='value'

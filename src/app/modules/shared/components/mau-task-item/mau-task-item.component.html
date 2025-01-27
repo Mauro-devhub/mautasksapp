@@ -21,9 +21,9 @@
       }
     </span>
   </div>
-  <div>
+  <div [routerLink]="['/details-task/' + idTask()]">
     <span>{{ title() }}</span>
     <span>Exp: {{ dateExpire() | date }}</span>
   </div>
-  <mau-chip [currentProcess]='process()' />
+  <mau-chip [currentState]='state()' />
 </div>
