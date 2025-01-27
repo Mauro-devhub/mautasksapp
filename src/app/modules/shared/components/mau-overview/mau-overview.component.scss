@@ -8,6 +8,11 @@
     justify-content: center;
     align-items: center;
 
+    @media (min-width: 0px) and (max-width: 576px) {
+      padding: 0px;
+      display: block;
+    }
+
     div {
       background: var(--mau-color-light);
       border-radius: 10px;
@@ -17,8 +22,7 @@
       }
 
       @media (min-width: 0px) and (max-width: 576px) {
-        height: 600px;
-        width: 300px;
+        height: 100%;
       }
   
       @media (min-width: 576px) and (max-width: 768px) {

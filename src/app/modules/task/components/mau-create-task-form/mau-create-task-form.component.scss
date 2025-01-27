@@ -6,6 +6,10 @@
     gap: 5px;
     position: relative;
 
+    @media (min-width: 0px) and (max-width: 576px) {
+      height: 800px;
+    }
+
     mau-button {
       position: absolute;
       bottom: 10px;
