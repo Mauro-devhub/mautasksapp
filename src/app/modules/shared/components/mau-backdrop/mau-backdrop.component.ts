@@ -13,9 +13,9 @@ export class MauBackdropComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit(): void {}
   
-  isBackdropClicked(event: any) {
+  isBackdropClicked(event: any): void {
     this.backdropClicked.emit(event);
   }
 }

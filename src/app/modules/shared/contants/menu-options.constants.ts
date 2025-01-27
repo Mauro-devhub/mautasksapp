@@ -25,17 +25,14 @@ export const MENU_OPTIONS: IMauMenuOption[] = [
 export const MENU_OPTIONS_TASK: IMauMenuOption[] = [
   {
     optionName: 'DONE',
-    iconName: 'add',
     action: EMenuOptionsState.DONE
   },
   {
     optionName: 'PENDING',
-    iconName: 'create-outline',
     action: EMenuOptionsState.PENDING,
   },
   {
     optionName: 'REMOVE',
-    iconName: 'create-outline',
     action: EMenuOptionsDefault.DELETE,
   }
 ];

@@ -25,23 +25,23 @@ export class EditTaskPage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.findTask();
   }
 
-  ionViewWillEnter() {
+  ionViewWillEnter(): void {
     this.findTask();
   }
 
-  findTask() {
+  findTask(): void {
     this.task.set(this.taskService.findTaskById(this.taskId));
   }
 
-  backPath() {
+  backPath(): void {
     this.route.navigateByUrl('/');
   }
 
-  updateTask(updateTaskDto: UpdateTaskDTO) {
+  updateTask(updateTaskDto: UpdateTaskDTO): void {
     this.taskService.updateTask(this.taskId, updateTaskDto);
     this.backPath();
   }

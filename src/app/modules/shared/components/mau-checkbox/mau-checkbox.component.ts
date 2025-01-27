@@ -12,9 +12,9 @@ export class MauCheckboxComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
-  ionFocus(e: any) {
+  ionFocus(e: any): void {
     this.checkboxSelected.emit(e);
   }
 }

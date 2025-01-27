@@ -1,5 +1,6 @@
 :host {
   --mau-menu-max-width: 150px;
+  --mau-menu-option-size: 14px;
 
   div {
     background: var(--mau-color-dark);
@@ -30,7 +31,7 @@
       }
 
       span {
-        font-size: 14px;
+        font-size: var(--mau-menu-option-size);
         font-weight: 500;
       }
 

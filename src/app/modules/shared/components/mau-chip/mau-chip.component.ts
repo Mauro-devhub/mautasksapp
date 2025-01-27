@@ -20,7 +20,7 @@ export class MauChipComponent implements OnInit {
     })
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
   setColor(type: EStateTask): EMauChip {
     if (type == EStateTask.DONE) {

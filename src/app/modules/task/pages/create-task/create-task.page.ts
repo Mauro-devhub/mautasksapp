@@ -18,14 +18,14 @@ export class CreateTaskPage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  previousPath() {
+  previousPath(): void {
     this.route.navigate(['/']);
   }
 
-  createTask(createTaskDto: CreateTaskDTO) {
+  createTask(createTaskDto: CreateTaskDTO): void {
     this.taskService.addTask(createTaskDto);
     this.previousPath();
   }
