@@ -2,7 +2,20 @@
   div {
     height: 100%;
     width: inherit;
-    padding-top: 20px;
+    margin-top: 20px;
+    padding: 10px;
+    overflow-y: scroll;
+
+    @media (min-width: 0px) and (max-width: 576px) {
+      padding-left: 10px;
+      padding-right: 10px;
+      margin-top: 10px;
+      overflow-y: scroll;
+    }
+
+    @media (min-height: 0px) and (max-height: 667px) {
+      height: auto;
+    }
 
     mau-info-message {
       --height: 100%;
