@@ -9,6 +9,11 @@
     border-top-right-radius: 10px;
     background: var(--mau-color-medium);
 
+    @media (min-width: 0px) and (max-width: 576px) {
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+    }
+
     h2 {
       color: var(--mau-color-light);
       margin: 0px;

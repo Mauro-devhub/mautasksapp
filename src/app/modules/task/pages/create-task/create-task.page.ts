@@ -1,8 +1,8 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { CreateTaskDTO } from './dtos/create-task.dto';
-import { TaskService } from '../services/task.service';
+import { CreateTaskDTO } from '../../dtos/create-task.dto';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'page-create-task',
