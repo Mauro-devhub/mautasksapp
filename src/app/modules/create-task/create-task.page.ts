@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { CreateTaskDTO } from './dtos/create-task.dto';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'page-create-task',
@@ -11,6 +12,7 @@ import { CreateTaskDTO } from './dtos/create-task.dto';
 })
 export class CreateTaskPage implements OnInit {
   route = inject(Router);
+  taskService = inject(TaskService);
 
   isBackButtonShown = signal<boolean>(true);
 
@@ -24,8 +26,8 @@ export class CreateTaskPage implements OnInit {
   }
 
   createTask(createTaskDto: CreateTaskDTO) {
-    console.log(createTaskDto);
-    this.route.navigateByUrl('/');
+    this.taskService.addTask(createTaskDto);
+    this.previousPath();
   }
 
 }

@@ -6,12 +6,13 @@
     <mau-header
       [menuOptions]='menuOptions'
       [isMenuOpen]='isMenuOpen()'
-      [isShownIconTrash]='tasksToRemove().length > 0'
+      [isShownIconTrash]='idsTasksToRemove().length > 0'
       [isBackButtonShown]='isBackButtonShown()'
       (removeElements)='removeItemTasks()'
       (backButton)='removeItemTasks()'
       (optionSelected)='optionMenuSelected($event)'
-      (menuOpened)='menuOpened($event)' header>
+      (menuOpened)='menuOpened($event)' header
+    >
       Mau Tasks App
     </mau-header>
     
@@ -19,15 +20,15 @@
       <mau-search-bar 
         [menuOptions]='menuOptionsSearchBar'
         [placeholder]='placeholderSearchBar' 
-        (searchBarValue)='searchBarValue($event)' 
-        (optionMenuSearchBarSelected)='filterListByAction($event)'
-        (menuSearchBarOpened)='menuSearchBarOpened($event)'
         [isShownBtnFilter]='true'
+        (searchBarValue)='searchBarValue($event)' 
+        (optionMenuSearchBarSelected)='optionMenuSearchBarSelected($event)'
+        (menuSearchBarOpened)='menuSearchBarOpened($event)'
       />
 
-      <mau-show-content-or-message [hasContent]='tasksFilter.length > 0' [message]='message'>
+      <mau-show-content-or-message [hasContent]='tasks().length > 0' [message]='message'>
         <mau-task-list 
-          [tasks]='tasksFilter' 
+          [tasks]='tasks()' 
           [optionSelected]='optionSelected()' 
           (taskSelected)='taskSelected($event)' 
           [menuOptions]='menuOptionsTask'

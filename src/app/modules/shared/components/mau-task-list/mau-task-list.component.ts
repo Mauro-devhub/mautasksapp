@@ -1,6 +1,6 @@
 import { Component, EventEmitter, input, OnInit, Output } from '@angular/core';
 
-import { ITasks } from './interfaces/mau-tasks-list.interfaces';
+import { ITask } from './interfaces/mau-tasks-list.interfaces';
 import { EMenuOptionsDefault } from '../mau-menu-options/enums/mau.menu-options.enums';
 import { IMauMenuOption } from '../mau-menu-options/interfaces/mau-menu-options.interface';
 import { TMenu } from '../mau-menu-options/types/mau-menu.types';
@@ -13,7 +13,7 @@ import { TMenu } from '../mau-menu-options/types/mau-menu.types';
 })
 export class MauTaskListComponent implements OnInit {
   optionSelected = input.required<EMenuOptionsDefault | null>();
-  tasks = input.required<ITasks[]>();
+  tasks = input.required<ITask[]>();
 
   menuOptions = input<IMauMenuOption[]>([]);
   isMenuTaskOpen = input<boolean>(false);

@@ -4,7 +4,8 @@ import { Subscription } from 'rxjs';
 
 import { ERROR_MESSAGES } from 'src/app/modules/shared/contants/error-messages.contant';
 import { CreateTaskDTO } from '../../dtos/create-task.dto';
-import { isBeforeUtils } from 'src/app/modules/shared/utils/date.utils';
+import { addDaysUtils, isBeforeUtils } from 'src/app/modules/shared/utils/date.utils';
+import { EStateTask } from 'src/app/modules/shared/components/mau-chip/enums/mau-chip.enums';
 
 @Component({
   selector: 'mau-create-task-form',
@@ -20,6 +21,9 @@ export class MauCreateTaskFormComponent implements OnInit, OnDestroy {
   errorMessageTextarea = signal<string>('');
   errorMessageDatetime = signal<string>('');
 
+  minDate: string = new Date().toISOString();
+  datetimeDefault = new Date(addDaysUtils(new Date(), 1)).toISOString();
+
   subscription!: Subscription;
 
   @Output() saveForm = new EventEmitter<CreateTaskDTO>();
@@ -34,8 +38,11 @@ export class MauCreateTaskFormComponent implements OnInit, OnDestroy {
     this.formGroupCreateTask = this.formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(5)]],
       description: ['', Validators.required],
-      dateExpire: ['', Validators.required]
+      dateExpire: ['', Validators.required],
+      stateTask: [EStateTask.PENDING]
     })
+
+    this.formGroupCreateTask.controls['dateExpire'].setValue(this.datetimeDefault);
 
     this.subscription = this.formGroupCreateTask.valueChanges.subscribe(() => {
       this.validationsForm();

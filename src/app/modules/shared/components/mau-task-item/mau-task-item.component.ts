@@ -4,7 +4,7 @@ import { EMenuOptionsDefault, EMenuOptionsState } from '../mau-menu-options/enum
 import { IMauMenuOption } from '../mau-menu-options/interfaces/mau-menu-options.interface';
 import { TMenu } from '../mau-menu-options/types/mau-menu.types';
 import { isBeforeUtils } from '../../utils/date.utils';
-import { EProcessChip } from '../mau-chip/enums/mau-chip.enums';
+import { EStateTask } from '../mau-chip/enums/mau-chip.enums';
 
 @Component({
   selector: 'mau-task-item',
@@ -16,13 +16,14 @@ export class MauTaskItemComponent implements OnInit {
   idTask = input.required<number>();
   title = input.required<string>();
   dateExpire = input.required<string>();
-  processTask = input.required<EProcessChip>();
+  stateTask = input.required<EStateTask>();
   optionSelected = input.required<EMenuOptionsDefault | null>();
+  isMenuOpen = input
   
   menuOptionsItem = input<IMauMenuOption[]>([]);
   isShownMenu = signal<boolean>(false);
   
-  process = computed(() => this.processTask());
+  state = computed(() => this.stateTask());
   menu = computed<IMauMenuOption[]>(() => this.menuOptionsItem());
 
   @Output() taskSelected = new EventEmitter<number>();
@@ -32,18 +33,21 @@ export class MauTaskItemComponent implements OnInit {
 
   constructor() { 
     effect(() => {
-      this.process = computed(() => this.validationDate());
+      this.state = computed(() => this.validationDate());
 
-      if (this.process() === EProcessChip.EXPIRED) {
+      if (this.state() === EStateTask.EXPIRED) {
         this.menu = computed(() => this.menuOptionsItem().filter((e) => e.action == EMenuOptionsDefault.DELETE));
       }
-      if (this.process() === EProcessChip.DONE) {
+
+      if (this.state() === EStateTask.DONE) {
         this.menu = computed(() => this.menuOptionsItem().filter((e) => e.action !== EMenuOptionsDefault.DELETE && e.action !== EMenuOptionsState.DONE));
       }
-      if (this.process() === EProcessChip.DONE && isBeforeUtils(new Date(this.dateExpire()), new Date())) {
+
+      if (this.state() === EStateTask.DONE && isBeforeUtils(new Date(this.dateExpire()), new Date())) {
         this.menu = computed(() => this.menuOptionsItem().filter((e) => e.action == EMenuOptionsDefault.DELETE));
       }
-      if (this.process() === EProcessChip.PENDING) {
+      
+      if (this.state() === EStateTask.PENDING) {
         this.menu = computed(() => this.menuOptionsItem().filter((e) => e.action !== EMenuOptionsDefault.DELETE && e.action !== EMenuOptionsState.PENDING));
       }
     })
@@ -53,7 +57,7 @@ export class MauTaskItemComponent implements OnInit {
 
   optionMenuItemSelected(e: IMauMenuOption): void {
     this.optionMenuSelected.emit({id: this.idTask(), option: e.action});
-    this.buttonToggleMenu();
+    this.isShownMenu.set(false);
   }
 
   buttonToggleMenu(): void {
@@ -72,15 +76,15 @@ export class MauTaskItemComponent implements OnInit {
     this.taskSelected.emit(this.idTask());
   }
 
-  validationDate(): EProcessChip {
-    if (this.processTask() === EProcessChip.DONE && isBeforeUtils(new Date(this.dateExpire()), new Date())) {
-      return this.processTask();
+  validationDate(): EStateTask {
+    if (this.stateTask() === EStateTask.DONE && isBeforeUtils(new Date(this.dateExpire()), new Date())) {
+      return this.stateTask();
     }
 
     if (isBeforeUtils(new Date(this.dateExpire()), new Date())) {
-      return EProcessChip.EXPIRED;
+      return EStateTask.EXPIRED;
     };
 
-    return this.processTask();
+    return this.stateTask();
   }
 }

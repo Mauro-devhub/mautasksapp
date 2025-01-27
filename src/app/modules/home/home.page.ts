@@ -1,16 +1,16 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { IMauMenuOption } from '../shared/components/mau-menu-options/interfaces/mau-menu-options.interface';
-import { ECustomOptions, EMenuOptionsDefault, EMenuOptionsState } from '../shared/components/mau-menu-options/enums/mau.menu-options.enums';
-import { ITasks } from '../shared/components/mau-task-list/interfaces/mau-tasks-list.interfaces';
+import { ECustomOptions, EMenuOptionsDefault } from '../shared/components/mau-menu-options/enums/mau.menu-options.enums';
 import { MENU_OPTIONS, MENU_OPTIONS_SEARCH_BAR, MENU_OPTIONS_TASK } from '../shared/contants/menu-options.constants';
 import { NAVIGATE_URL } from '../shared/enums/navigate-url.enum';
-import { EProcessChip } from '../shared/components/mau-chip/enums/mau-chip.enums';
+import { EStateTask } from '../shared/components/mau-chip/enums/mau-chip.enums';
 import { TMenu } from '../shared/components/mau-menu-options/types/mau-menu.types';
 import { ERROR_MESSAGES } from '../shared/contants/error-messages.contant';
 import { filterByElement } from '../shared/utils/filters.utils';
-import { formatUtils } from '../shared/utils/date.utils';
+import { TaskService } from '../services/task.service';
+import { TaskModel } from '../model/task.model';
 
 @Component({
   selector: 'page-home',
@@ -20,13 +20,16 @@ import { formatUtils } from '../shared/utils/date.utils';
 })
 export class HomePage {
   route = inject(Router);
+  taskService = inject(TaskService);
+
+  tasks = computed(() => this.taskService.tasks());
 
   isMenuOpen = signal<boolean>(false);
-  isShownIconTrash = signal<boolean>(false);
-  optionSelected = signal<EMenuOptionsDefault | null>(null);
   isBackButtonShown = signal<boolean>(false);
   
-  tasksToRemove = signal<number[]>([]);
+  optionSelected = signal<EMenuOptionsDefault | null>(null);
+  
+  idsTasksToRemove = signal<number[]>([]);
   tasksToComplete = signal<number[]>([]);
 
   message = ERROR_MESSAGES.NOT_HAS_CONTENT;
@@ -36,29 +39,6 @@ export class HomePage {
   menuOptionsTask: IMauMenuOption[] = MENU_OPTIONS_TASK;
   menuOptionsSearchBar: IMauMenuOption[] = MENU_OPTIONS_SEARCH_BAR;
 
-  tasks: ITasks[] = [
-    {
-      id: 1,
-      title: 'Mauricio',
-      dateExpire: formatUtils(new Date('01/20/25')),
-      processTask: EProcessChip.DONE
-    },
-    {
-      id: 2,
-      title: 'Jose',
-      dateExpire: formatUtils(new Date('01/23/25')),      
-      processTask: EProcessChip.EXPIRED
-    },
-    {
-      id: 3,
-      title: 'Carla',
-      dateExpire: formatUtils(new Date('01/28/25')),
-      processTask: EProcessChip.PENDING
-    }
-  ]
-
-  tasksFilter: ITasks[] = [...this.tasks];
-
   constructor() { }
 
   backdropClicked(e: any): void {
@@ -66,17 +46,16 @@ export class HomePage {
   }
 
   menuOpened(e: boolean): void {
-    this.isShownIconTrash.set(false);
     this.optionSelected.set(null);
     this.isBackButtonShown.set(false);
     this.isMenuOpen.set(e);
-    if (this.tasksToRemove().length > 0) {
-      this.tasksToRemove.set([]);
+
+    if (this.idsTasksToRemove().length > 0) {
+      this.idsTasksToRemove.set([]);
     }
   }
 
   menuSearchBarOpened(e: boolean) {
-    this.isShownIconTrash.set(false);
     this.optionSelected.set(null);
     this.isBackButtonShown.set(false);
     this.isMenuOpen.set(false);
@@ -110,15 +89,15 @@ export class HomePage {
       return;
     }
 
-    if (!this.tasksToRemove().includes(e)) {
-      const taskToRemove = [...this.tasksToRemove(), e];
-      this.tasksToRemove.set(taskToRemove);
+    if (!this.idsTasksToRemove().includes(e)) {
+      const idTaskToRemove = [...this.idsTasksToRemove(), e];
+      this.idsTasksToRemove.set(idTaskToRemove);
     } else {
-      const taskToRemove = this.tasksToRemove().filter((prev) => prev !== e);
-      this.tasksToRemove.set(taskToRemove);
+      const idTaskExist = this.idsTasksToRemove().filter((prev) => prev !== e);
+      this.idsTasksToRemove.set(idTaskExist);
     }
 
-    if (this.tasksToRemove().length > 0) {
+    if (this.idsTasksToRemove().length > 0) {
       this.isBackButtonShown.set(false);
     } else {
       this.isBackButtonShown.set(true);
@@ -127,66 +106,59 @@ export class HomePage {
 
   taskChangeState(task: {id: number, option: TMenu}): void {
     if (task.option === EMenuOptionsDefault.DELETE) {
-      this.tasks = this.tasks.filter((e) => e.id !== task.id);
+      this.taskService.removeTask(task.id);
+      return;
     }
 
-    this.tasksFilter = this.tasks.map((e) => {
-      if (e.id === task.id) {
-        return {...e, processTask: task.option as unknown as EProcessChip}
-      }
-
-      return e;
-    })
-
-    this.tasks = this.tasks.map((e) => {
-      if (e.id === task.id) {
-        return {...e, processTask: task.option as unknown as EProcessChip}
-      }
-
-      return e;
-    })
+    this.taskService.changueStateTask(task.id, task.option as unknown as EStateTask);
   }
 
   searchBarValue(e: string): void {
-    this.tasksFilter = filterByElement<ITasks>('title', this.tasks, e);
+    this.tasks = computed(() => filterByElement<TaskModel>('title', this.taskService.tasks(), e));
     this.message = ERROR_MESSAGES.ELEMENT_FILTER_NOT_FOUND;
   }
 
-  filterListByAction(e: IMauMenuOption): void {
+  optionMenuSearchBarSelected(e: IMauMenuOption): void {
     if (e.optionName == ECustomOptions.SHOW_ALL) {
-      this.tasksFilter = this.tasks;
+      this.tasks = computed(() => this.taskService.tasks());
+      return;
     }
 
-    if (e.optionName == ECustomOptions.EXP_DATE) {
-      this.tasksFilter = this.tasks.sort((a, b) => {
+    if (e.optionName == ECustomOptions.EXP_DATE_ASC) {
+      this.tasks = computed(() => this.taskService.tasks().sort((a, b) => {
+        const dateA = new Date(a.dateExpire);
+        const dateB = new Date(b.dateExpire);
+        
+        return dateA.getTime() - dateB.getTime();
+      }));
+      return;
+    }
+
+    if (e.optionName == ECustomOptions.EXP_DATE_DESC) {
+      this.tasks = computed(() => this.taskService.tasks().sort((a, b) => {
         const dateA = new Date(a.dateExpire);
         const dateB = new Date(b.dateExpire);
         
         return dateB.getTime() - dateA.getTime();
-      });
+      }));
+      return;
     }
     
-    if (e.optionName === EMenuOptionsState.DONE) {
-      this.tasksFilter = filterByElement<ITasks>('processTask', this.tasks, e.optionName);
-    }
-
-    if (e.optionName === EMenuOptionsState.EXPIRED) {
-      this.tasksFilter = filterByElement<ITasks>('processTask', this.tasks, e.optionName);
-    }
-
-    if (e.optionName === EMenuOptionsState.PENDING) {
-      this.tasksFilter = filterByElement<ITasks>('processTask', this.tasks, e.optionName);
-    }
-
+    this.tasks = computed(() => filterByElement<TaskModel>('stateTask', this.taskService.tasks(), e.optionName));
     this.message = ERROR_MESSAGES.ELEMENT_FILTER_NOT_FOUND;
   }
 
   removeItemTasks(): void {
-    this.tasks = [...this.tasks.filter((e) => !this.tasksToRemove().includes(e.id))];
-    this.tasksFilter = [...this.tasks.filter((e) => !this.tasksToRemove().includes(e.id))];
-    this.tasksToRemove.set([]);
-    this.isShownIconTrash.set(false);
-    this.optionSelected.set(null);
+    if (this.idsTasksToRemove().length > 0) {
+      this.taskService.removeTasks(this.idsTasksToRemove());
+      this.idsTasksToRemove.set([]);
+    }
+
+    if (this.tasks().length <= 0) {
+      this.message = ERROR_MESSAGES.NOT_HAS_CONTENT;
+    }
+
     this.isBackButtonShown.set(false);
+    this.optionSelected.set(null);
   }
 }

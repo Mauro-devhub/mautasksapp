@@ -1,4 +1,6 @@
 :host {
+  --cursor-datetime: pointer;
+
   div {
     max-width: 270px;
     display: flex;
@@ -13,7 +15,7 @@
     }
 
     mau-input {
-      --cursor-input: pointer;
+      --cursor-input: var(--cursor-datetime);
       --padding-top-input: 0px;
       --padding-bottom-input: 0px;
       --padding-start-input: 0px;
