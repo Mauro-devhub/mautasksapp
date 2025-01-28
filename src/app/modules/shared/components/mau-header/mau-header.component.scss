@@ -39,9 +39,13 @@
     
     mau-menu-options {
       position: absolute;
-      top: 115px;
+      top: 120px;
       right: 10px;
       z-index: 5;
+
+      @media (min-width: 576px) {
+        top: 55px;
+      }
     }
   }
 }
