@@ -5,11 +5,15 @@
   <div>
     <span>
       @if (optionSelected() == 'DELETE') {
-        <mau-checkbox [value]='idTask()' (checkboxSelected)='itemTaskSelected($event)' />
+        <mau-checkbox [value]='idTask()' (checkboxSelected)='itemTaskCheckboxSelected($event)' />
       }
   
-      @if (optionSelected() == 'EDIT' && !validation()) {
-        <mau-icon name='create-outline' (click)='itemTaskToEdit()' />
+      @if (optionSelected() == 'EDIT') {
+        @if (stateTask() !== 'EXPIRED') {
+          <mau-icon name='create-outline' (click)='itemTaskSelected()' />
+        } @else {
+          <mau-icon name='trash-outline' (click)='itemTaskSelected()' />
+        }
       }
 
       @if (optionSelected() == null) {

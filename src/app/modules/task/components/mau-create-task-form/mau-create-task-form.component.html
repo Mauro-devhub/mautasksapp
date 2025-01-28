@@ -49,11 +49,12 @@
         formGroupCreateTask.controls["dateExpire"].dirty
       )
     '
-    type='submit'>
-      @if (task()) {
-        <mau-icon name='refresh-circle-outline' />
-      } @else { 
-        <mau-icon name='add' />
-      }
+    type='submit'
+  >
+    @if (task()) {
+      <mau-icon name='refresh-circle-outline' />
+    } @else { 
+      <mau-icon name='add' />
+    }
   </mau-button>
 </form>

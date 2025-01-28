@@ -22,6 +22,8 @@ export class HomePage {
   route = inject(Router);
   taskService = inject(TaskService);
 
+  headerTitle: string = 'Mau Tasks App';
+
   tasks = computed(() => this.taskService.tasks());
 
   isMenuOpen = signal<boolean>(false);
@@ -57,9 +59,8 @@ export class HomePage {
   }
 
   menuSearchBarOpened(e: boolean): void {
-    this.optionSelected.set(null);
-    this.isBackButtonShown.set(false);
     this.isMenuOpen.set(false);
+    this.optionSelected.set(null);
   }
 
   optionMenuSelected(e: EMenuOptionsDefault): void {
@@ -78,23 +79,26 @@ export class HomePage {
     this.isMenuOpen.set(false);
   }
 
-  taskSelected(e: number): void {
+  taskSelected(e: {id: number, action: EStateTask | null}): void {
+    if (this.optionSelected() == null) {
+      return;
+    }
+
     if (this.isBackButtonShown() && this.optionSelected() == EMenuOptionsDefault.EDIT) {
-      this.route.navigateByUrl(`${NAVIGATE_URL.EDIT_TASK}/${e}`);
+      e.action !== EStateTask.EXPIRED
+      ? this.route.navigateByUrl(NAVIGATE_URL.EDIT_TASK + `/${e.id}`)
+      : this.taskService.removeTask(e.id)
+
       this.isBackButtonShown.set(false);
       this.optionSelected.set(null);
       return;
     }
 
-    if (this.optionSelected() == null) {
-      return;
-    }
-
-    if (!this.idsTasksToRemove().includes(e)) {
-      const idTaskToRemove = [...this.idsTasksToRemove(), e];
+    if (e.action == null && !this.idsTasksToRemove().includes(e.id)) {
+      const idTaskToRemove = [...this.idsTasksToRemove(), e.id];
       this.idsTasksToRemove.set(idTaskToRemove);
     } else {
-      const idTaskExist = this.idsTasksToRemove().filter((prev) => prev !== e);
+      const idTaskExist = this.idsTasksToRemove().filter((prev) => prev !== e.id);
       this.idsTasksToRemove.set(idTaskExist);
     }
 
@@ -129,7 +133,7 @@ export class HomePage {
       this.tasks = computed(() => this.taskService.tasks().sort((a, b) => {
         const dateA = new Date(a.dateExpire);
         const dateB = new Date(b.dateExpire);
-        
+
         return dateA.getTime() - dateB.getTime();
       }));
 
@@ -140,18 +144,25 @@ export class HomePage {
       this.tasks = computed(() => this.taskService.tasks().sort((a, b) => {
         const dateA = new Date(a.dateExpire);
         const dateB = new Date(b.dateExpire);
-        
+
         return dateB.getTime() - dateA.getTime();
       }));
 
       return;
     }
-    
+
     this.tasks = computed(() => filterByElement<TaskModel>('stateTask', this.taskService.tasks(), e.optionName));
     this.message = ERROR_MESSAGES.ELEMENT_FILTER_NOT_FOUND;
   }
 
-  removeItemTasks(): void {
+  undoActions() {
+    this.isBackButtonShown.set(false);
+    this.optionSelected.set(null);
+    this.isMenuOpen.set(false);
+    this.optionSelected.set(null);
+  }
+
+  removeItemsTasks(): void {
     if (this.idsTasksToRemove().length > 0) {
       this.taskService.removeTasks(this.idsTasksToRemove());
       this.idsTasksToRemove.set([]);
@@ -161,7 +172,6 @@ export class HomePage {
       this.message = ERROR_MESSAGES.NOT_HAS_CONTENT;
     }
 
-    this.isBackButtonShown.set(false);
     this.optionSelected.set(null);
   }
 }

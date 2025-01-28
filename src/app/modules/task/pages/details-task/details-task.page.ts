@@ -28,13 +28,13 @@ export class DetailsTaskPage implements OnInit {
   }
 
   setTaskDetails(): void {
-    const taskIndex = this.tasks().findIndex((e) => e.id === this.taskId);
-    if (taskIndex !== -1) {
-      this.task = this.tasks()[taskIndex]; 
+    const task = this.taskService.findTaskById(this.taskId);
+    if (task) {
+      this.task = task;
       return;
     }
 
-    this.task = new TaskModel();
+    this.backPath();
   }
 
   backPath(): void {

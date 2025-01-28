@@ -16,6 +16,8 @@ export class CreateTaskPage implements OnInit {
 
   isBackButtonShown = signal<boolean>(true);
 
+  titleHeader: string = 'Create task';
+
   constructor() { }
 
   ngOnInit(): void {

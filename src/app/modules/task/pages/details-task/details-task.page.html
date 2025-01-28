@@ -1,9 +1,16 @@
+<mau-mobile-header
+  [isBackButtonShown]='true'
+  (backButton)='backPath()'
+>
+  {{ 'Details Task #' + taskId }}
+</mau-mobile-header>
+
 <ion-content>
   <mau-overview>
     <mau-header 
+      header
       [isBackButtonShown]='true'
       (backButton)='backPath()'
-      header
     >
       {{ 'Details Task #' + taskId }}
     </mau-header>
