@@ -1,11 +1,21 @@
+<mau-mobile-header
+  [isBackButtonShown]='isBackButtonShown()'
+  (backButton)='previousPath()'>
+  {{ titleHeader }}
+</mau-mobile-header>
+
 <ion-content>
   <mau-overview>
-    <mau-header 
+    <mau-header
+      header
       [isBackButtonShown]='isBackButtonShown()'
-      (backButton)='previousPath()' header>
-      Create task
+      (backButton)='previousPath()'>
+      {{ titleHeader }}
     </mau-header>
 
-    <mau-create-task-form (saveForm)='createTask($event)' content />
+    <mau-create-task-form
+      content
+      (saveForm)='createTask($event)'  
+    />
   </mau-overview>
 </ion-content>

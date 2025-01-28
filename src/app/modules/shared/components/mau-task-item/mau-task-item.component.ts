@@ -22,14 +22,13 @@ export class MauTaskItemComponent implements OnInit {
   menuOptionsItem = input<IMauMenuOption[]>([]);
   
   isShownMenu = signal<boolean>(false);
-  validation = signal<boolean>(false);
   
   state = computed(() => this.stateTask());
   menu = computed<IMauMenuOption[]>(() => this.menuOptionsItem());
 
-  taskService = inject(TaskService);
+  private taskService = inject(TaskService);
 
-  @Output() taskSelected = new EventEmitter<number>();
+  @Output() taskSelected = new EventEmitter<{id: number, action: EStateTask | null}>();
   @Output() optionMenuSelected = new EventEmitter<{id: number, option: TMenu}>();
 
   date: string = '';
@@ -53,11 +52,6 @@ export class MauTaskItemComponent implements OnInit {
       if (this.state() === EStateTask.PENDING) {
         this.menu = computed(() => this.menuOptionsItem().filter((e) => e.action !== EMenuOptionsDefault.DELETE && e.action !== EMenuOptionsState.PENDING));
       }
-
-      this.validation.set( 
-        this.stateTask() == EStateTask.EXPIRED ||
-        this.stateTask() == EStateTask.DONE && isBeforeUtils(new Date(this.dateExpire() as unknown as Date), new Date())
-      );
     })
   }
 
@@ -76,16 +70,21 @@ export class MauTaskItemComponent implements OnInit {
     this.isShownMenu.set(!this.isShownMenu());
   }
 
-  itemTaskSelected(e: any): void {
-    this.taskSelected.emit(e.target.value());
+  itemTaskCheckboxSelected(e: any): void {
+    this.taskSelected.emit({id: e.target.value() as number, action: null});
   }
 
   backdropClicked(e: any): void {
     this.isShownMenu.set(false);
   }
 
-  itemTaskToEdit(): void {
-    this.taskSelected.emit(this.idTask());
+  itemTaskSelected(): void {
+    this.taskSelected.emit(
+      {
+        id: this.idTask(), 
+        action: this.stateTask() ? this.stateTask() : null
+      }
+    );
   }
 
   validationDate(): EStateTask {

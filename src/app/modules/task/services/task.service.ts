@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 
 import { TaskModel } from '../model/task.model';
 import { CreateTaskDTO } from '../dtos/create-task.dto';
@@ -11,18 +11,20 @@ import { LocalStorageService } from '../../shared/services/localstorage.service'
   providedIn: 'root'
 })
 export class TaskService {
-  localStorageService = inject(LocalStorageService);
-
-  tasks = signal<TaskModel[]>([]);
-
-  keyTasks = 'tasks';
+  private localStorageService = inject(LocalStorageService);
   
+  private tasksStorage = signal<TaskModel[]>([]);
+
+  private keyTasks = 'tasks';
+  
+  tasks = computed<TaskModel[]>(() => this.tasksStorage());
+
   constructor() { 
     this.getAllTasks();
   }
 
   getAllTasks(): void {
-    this.tasks.set(this.localStorageService.getItem<TaskModel[]>(this.keyTasks) || []);
+    this.tasksStorage.set(this.localStorageService.getItem<TaskModel[]>(this.keyTasks) || []);
   }
 
   addTask(createTaskDto: CreateTaskDTO): void {
@@ -67,7 +69,7 @@ export class TaskService {
     this.getAllTasks();
   }
 
-  findTaskById(taskId: number): TaskModel {
+  findTaskById(taskId: number): TaskModel | null{
     this.getAllTasks();
     const tasks = this.tasks();
     
@@ -75,7 +77,7 @@ export class TaskService {
       return tasks.find((e) => e.id == taskId) as TaskModel;
     }
 
-    return new TaskModel();
+    return null;
   }
 
   changueStateTask(taskId: number, state: EStateTask): void {

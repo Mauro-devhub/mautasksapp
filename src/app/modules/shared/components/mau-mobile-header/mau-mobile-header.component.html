@@ -1,0 +1,14 @@
+<ion-header [translucent]="true">
+  <mau-header
+    [menuOptions]='menuOptions()'
+    [isMenuOpen]='isMenuOpen()'
+    [isShownIconTrash]='isShownIconTrash()'
+    [isBackButtonShown]='isBackButtonShown()'
+    (removeElements)='removeElements.emit()'
+    (backButton)='backButton.emit()'
+    (optionSelected)='optionMenuSelected($event)'
+    (menuOpened)='menuMobileOpened($event)'
+  >
+    <ng-content />
+  </mau-header>
+</ion-header>
