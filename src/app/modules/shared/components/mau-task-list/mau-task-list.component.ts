@@ -4,6 +4,7 @@ import { ITask } from './interfaces/mau-tasks-list.interfaces';
 import { EMenuOptionsDefault } from '../mau-menu-options/enums/mau.menu-options.enums';
 import { IMauMenuOption } from '../mau-menu-options/interfaces/mau-menu-options.interface';
 import { TMenu } from '../mau-menu-options/types/mau-menu.types';
+import { EStateTask } from '../mau-chip/enums/mau-chip.enums';
 
 @Component({
   selector: 'mau-task-list',
@@ -18,14 +19,14 @@ export class MauTaskListComponent implements OnInit {
   menuOptions = input<IMauMenuOption[]>([]);
   isMenuTaskOpen = input<boolean>(false);
   
-  @Output() taskSelected = new EventEmitter<number>();
+  @Output() taskSelected = new EventEmitter<{id: number, action: EStateTask | null}>();
   @Output() taskChangeState = new EventEmitter<{id: number, option: TMenu}>();
 
   constructor() { }
 
   ngOnInit() {}
 
-  itemTaskSelected(e: number): void {
+  itemTaskSelected(e: {id: number, action: EStateTask | null}): void {
     this.taskSelected.emit(e);
   }
 

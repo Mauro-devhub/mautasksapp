@@ -18,6 +18,7 @@ export class EditTaskPage implements OnInit {
   activatedRoute = inject(ActivatedRoute);
   taskService = inject(TaskService);
 
+  titleHeader: string = 'Edit task';
   taskId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
   task = signal<TaskModel>(new TaskModel());
 
@@ -34,7 +35,13 @@ export class EditTaskPage implements OnInit {
   }
 
   findTask(): void {
-    this.task.set(this.taskService.findTaskById(this.taskId));
+    const task = this.taskService.findTaskById(this.taskId);
+    if (task) {
+      this.task.set(task);
+      return;
+    }
+
+    this.backPath();
   }
 
   backPath(): void {
