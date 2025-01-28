@@ -9,6 +9,7 @@ node version >= 20
 ionic version 7.2.0
 
 github repo link: https://github.com/Mauro-devhub/mautasksapp
+app: https://mautasksapp.vercel.app/home
 
 step for install
 
