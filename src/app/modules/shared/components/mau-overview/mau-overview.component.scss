@@ -16,12 +16,6 @@
     div {
       background: var(--mau-color-light);
       border-radius: 10px;
-
-      ::ng-deep [header] { 
-        @media (max-width: 576px) {
-          display: none;
-        }
-      }
       
       &:nth-child(2) {
         padding: 30px;

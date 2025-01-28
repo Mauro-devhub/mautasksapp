@@ -10,6 +10,8 @@
     background: var(--mau-color-medium);
 
     @media (min-width: 0px) and (max-width: 576px) {
+      height: 130px;
+      padding-top: 50px;
       border-top-left-radius: 0px;
       border-top-right-radius: 0px;
     }
@@ -37,7 +39,7 @@
     
     mau-menu-options {
       position: absolute;
-      top: 55px;
+      top: 115px;
       right: 10px;
       z-index: 5;
     }
