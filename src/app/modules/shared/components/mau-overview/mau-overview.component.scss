@@ -21,6 +21,7 @@
         padding: 30px;
 
         @media (min-width: 0px) and (max-width: 576px) {
+          border-radius: 0px;
           padding: 10px;
           height: inherit;
         }

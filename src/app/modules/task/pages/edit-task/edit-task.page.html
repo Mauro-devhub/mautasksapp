@@ -1,13 +1,13 @@
 <ion-content>
   <mau-overview>
     <mau-header 
+      header
       [isBackButtonShown]='true'
       (backButton)='backPath()'
-      header
     >
-      Edit task
+      {{ titleHeader }}
     </mau-header>
 
-    <mau-create-task-form [task]='task()' [menuOptionsTask]='menuOptionsTask' (saveForm)='updateTask($event)' content />
+    <mau-create-task-form content [task]='task()' [menuOptionsTask]='menuOptionsTask' (saveForm)='updateTask($event)' />
   </mau-overview>
 </ion-content>

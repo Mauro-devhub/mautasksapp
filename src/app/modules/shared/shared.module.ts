@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { MauOverviewComponent } from './components/mau-overview/mau-overview.component';
 import { MauHeaderComponent } from './components/mau-header/mau-header.component';
@@ -19,7 +20,6 @@ import { MauInputComponent } from './components/mau-input/mau-input.component';
 import { MauTextareaComponent } from './components/mau-textarea/mau-textarea.component';
 import { MauDatetimeComponent } from './components/mau-datetime/mau-datetime.component';
 import { MauSearchBarComponent } from './components/mau-search-bar/mau-search-bar.component';
-import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
