@@ -44,7 +44,7 @@ ionic build for ios and will open xcode automatically you need to select a devic
 
 ionic build for android and will open android studio automatically you need wait for all process finish, once done select a device and click on start
 
-How work Mau Tasks App
+**How work Mau Tasks App**
 
 **1- Create a task**
 
