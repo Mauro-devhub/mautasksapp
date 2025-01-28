@@ -1,16 +1,3 @@
-<mau-mobile-header
-  [menuOptions]='tasks().length <= 0 ? menuUniqueOptionIsCreate : menuOptions'
-  [isMenuOpen]='isMenuOpen()'
-  [isShownIconTrash]='idsTasksToRemove().length > 0'
-  [isBackButtonShown]='isBackButtonShown()'
-  (removeElements)='removeItemsTasks()'
-  (backButton)='undoActions()'
-  (optionSelected)='optionMenuSelected($event)'
-  (menuOpened)='menuOpened($event)'
->
-  {{ headerTitle }}
-</mau-mobile-header>
-
 <ion-content [scrollX]='false'>
   @if (isMenuOpen()) {
     <mau-backdrop [isBackdropVisible]='true' (backdropClicked)='backdropClicked($event)'/>
