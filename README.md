@@ -19,13 +19,21 @@ step for install
 
 run app
 
-4- npm run start
+4- run command on directory mautasksapp: npm run start
 5- browser - http://localhost:4200/home
 
 run on ios
 
 you need install xcode
 
-run: ionic cap build ios
+run command on directory mautasksapp: ionic cap build ios
 
 ionic build for ios and will open xcode automatically you need to select a device and click on start to show the app runnin on ios device
+
+run on android
+
+you need install android studio
+
+run command on directory mautasksapp: ionic cap build android
+
+ionic build for android and will open android studio automatically you need wait for all process finish, once done select a device and click on start
