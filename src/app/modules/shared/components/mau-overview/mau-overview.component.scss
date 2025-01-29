@@ -9,6 +9,7 @@
     align-items: center;
 
     @media (min-width: 0px) and (max-width: 576px) {
+      height: 100vh;
       padding: 0px;
       display: block;
     }
