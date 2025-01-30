@@ -1,3 +1,10 @@
+<mau-header-mobile
+  [isBackButtonShown]='isBackButtonShown()'
+  (backButton)='previousPath()'
+>
+  {{ titleHeader }}
+</mau-header-mobile>
+
 <ion-content>
   <mau-overview>
     <mau-header

@@ -20,6 +20,7 @@ import { MauInputComponent } from './components/mau-input/mau-input.component';
 import { MauTextareaComponent } from './components/mau-textarea/mau-textarea.component';
 import { MauDatetimeComponent } from './components/mau-datetime/mau-datetime.component';
 import { MauSearchBarComponent } from './components/mau-search-bar/mau-search-bar.component';
+import { MauHeaderMobileComponent } from './components/mau-header-mobile/mau-header-mobile.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { MauSearchBarComponent } from './components/mau-search-bar/mau-search-ba
     MauInputComponent,
     MauTextareaComponent,
     MauDatetimeComponent,
-    MauSearchBarComponent
+    MauSearchBarComponent,
+    MauHeaderMobileComponent
   ],
   imports: [
     CommonModule,
@@ -62,7 +64,8 @@ import { MauSearchBarComponent } from './components/mau-search-bar/mau-search-ba
     MauInputComponent,
     MauTextareaComponent,
     MauDatetimeComponent,
-    MauSearchBarComponent
+    MauSearchBarComponent,
+    MauHeaderMobileComponent
   ]
 })
 export class SharedModule {}
