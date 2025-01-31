@@ -26,7 +26,7 @@
       mau-menu-options {
         position: absolute;
         left: 10px;
-        top: 40px;
+        top: 33px;
         z-index: 5;
       }
     }
@@ -34,6 +34,14 @@
     & > div:nth-child(2) {
       box-shadow: none;
       justify-content: space-between;
+
+      span {
+        max-width: 130px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
       @media (min-width: 0px) and (max-width: 576px) {
         width: 150px;
 
@@ -46,12 +54,8 @@
         }
       }
 
-      @media (min-width: 576px) and (max-width: 768px) {
-        width: 245px;
-      }
-
-      @media (min-width: 768px) {
-        width: 280px;
+      @media (min-width: 576px) {
+        width: 310px;
       }
     }
   }
