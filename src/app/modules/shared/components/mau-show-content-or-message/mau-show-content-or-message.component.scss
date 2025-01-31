@@ -1,38 +1,11 @@
 :host {
+  --height-content: inherit;
+
   div {
-    height: 100%;
+    height: var(--height-content);
     width: inherit;
-    margin-top: 10px;
-    padding: 10px;
-    overflow-y: scroll;
-
-    @media (max-width: 576px) {
-      padding-left: 10px;
-      padding-right: 10px;
-      margin-top: 10px;
-      overflow-y: scroll;
-      height: 80vh;
-    }
-
-    @media (width: 540px) and (height: 720px) { 
-      height: 72vh;
-    }
-
-    @media (max-width: 377px) {
-      height: 70vh;
-    }
-
-    @media (min-width: 377px) and (max-width: 417px) {
-      height: 75vh;
-    }
-
-    @media (width: 344px) and (height: 882px) { 
-      height: 77vh;
-    }
-
-    // @media (min-height: 0px) and (max-height: 667px) {
-    //   height: auto;
-    // }
+    padding-left: 10px;
+    padding-right: 10px;
 
     mau-info-message {
       --height: 100%;

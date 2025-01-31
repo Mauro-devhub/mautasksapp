@@ -9,13 +9,6 @@
     border-top-right-radius: 10px;
     background: var(--mau-color-medium);
 
-    @media (min-width: 0px) and (max-width: 576px) {
-      height: 130px;
-      padding-top: 50px;
-      border-top-left-radius: 0px;
-      border-top-right-radius: 0px;
-    }
-
     h2 {
       color: var(--mau-color-light);
       margin: 0px;
@@ -25,27 +18,18 @@
       position: absolute;
       cursor: pointer;
       left: 10px;
-
     }
     
     mau-button {
-      @media (min-width: 0px) and (max-width: 576px) {
-        --button-border-radius: 5px;
-      }
-
       position: absolute;
       right: 10px;
     }
     
     mau-menu-options {
       position: absolute;
-      top: 120px;
+      top: 55px;
       right: 10px;
       z-index: 5;
-
-      @media (min-width: 576px) {
-        top: 55px;
-      }
     }
   }
 }
